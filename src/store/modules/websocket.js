@@ -31,7 +31,7 @@ export const actions = {
         console.log("Subscribe");
         this.stompClient.subscribe("/broker/eventSub", tick => {
           const events = JSON.parse(tick.body);
-          commit("index/events", events, { root: true});
+          commit("notifications/events", events, { root: true});
         });
       },
       error => {

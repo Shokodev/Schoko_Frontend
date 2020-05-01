@@ -4,6 +4,8 @@ const state = {
 eventList: []
 };
 
+
+
 const getters = {
 eventList: state => state.Eventlist
 };
