@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <button v-on:click="test()"></button>
+    <button  v-on:click="test">Click Me</button>
 
   </div>
 </template>
@@ -9,18 +9,23 @@
 import { mapActions } from 'vuex'
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-},
+  data() {
+    return {
+
+    }
+  },
 
 methods: {
-  ...mapActions([connect]),
+  ...mapActions(["connect"]),
 
-  test: test() {
+  test: function() {
+    console.log("Button")
     this.connect()
   }
 }
+};
+
+
 </script>
 
 
