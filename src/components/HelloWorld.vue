@@ -16,11 +16,15 @@ export default {
   },
 
 methods: {
-  ...mapActions(["connect"]),
+  ...mapActions([
+      'connect'
+  ]),
 
   test: function() {
-    console.log("Button")
-    this.connect()
+    this.connect();
+
+
+
   }
 }
 };
