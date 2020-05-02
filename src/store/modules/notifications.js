@@ -1,12 +1,10 @@
-import Vue from "vue";
+
 
 const state = {
 eventList: []
 };
 
-
-
-const getters = {
+export const getters = {
 eventList: state => state.Eventlist
 };
 
@@ -17,7 +15,8 @@ const mutations = {
 
 };
 export const actions = {
-subscribeBacnetObject({ state, commit}, bacnetObject) {
+  // eslint-disable-next-line no-unused-vars
+  subscribeBacnetObject({ state, commit}, bacnetObject) {
   if (this.stompClient && this.stompClient.connected) {
     const subscribeURL = "/objects/objectSub";
     this.stompClient.subscribe(
