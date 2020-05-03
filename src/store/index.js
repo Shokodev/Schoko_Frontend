@@ -5,6 +5,7 @@ import notifications from './modules/notifications'
 import settings from './modules/settings'
 import structure from './modules/structure'
 import devices from "./modules/devices";
+import bacnetObject from "./modules/bacnetObject";
 
 
 Vue.use(Vuex);
@@ -15,6 +16,7 @@ modules: {
   notifications,
   settings,
   structure,
-  devices
+  devices,
+  bacnetObject
 }
 });
