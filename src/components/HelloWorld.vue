@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <button  v-on:click="test">Notification</button>
+    <button  v-on:click="connectToWs">Verbinden</button>
+    <button  v-on:click="loadEvents">Events</button>
   </div>
 </template>
 
@@ -19,15 +20,17 @@ methods: {
     'connect',
     'newSettings',
     'completeHierarchy',
-    'deviceStructure'
-
-
+    'deviceStructure',
+    'subriceToEvents'
   ]),
 
-  test: function () {
+  connectToWs: function () {
     this.connect();
+  },
+  loadEvents: function () {
+    this.subriceToEvents();
   }
-}
+},
 };
 
 

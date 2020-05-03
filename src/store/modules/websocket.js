@@ -6,26 +6,27 @@ export const state = () => ({
 });
 
 export const actions = {
-  connect ({ state, commit }) {
+  connect ({ state}) {
 
     if (state.connected) return;
     this.socket = new WebSocket(state.websocketURL);
     this.stompClient = Stomp.over(this.socket);
     this.stompClient.debug = msg => {}; // eslint-disable-line
     this.stompClient.connect(
-      {
-      },
-      frame => { // eslint-disable-line 
-        commit("setConnected", true);
-        this.stompClient.subscribe("/broker/eventSub", tick => {
-          const events = JSON.parse(tick.body);
-          commit("notifications/events", events, { root: true});
-        });
-      },
-      error => {
-        console.log(error);
-        commit("setConnected", false);
-      }
+      // {
+      // },
+      // frame => { // eslint-disable-line
+      //   commit("setConnected", true);
+      //   console.log("Subscribe");
+      //   this.stompClient.subscribe("/broker/eventSub", tick => {
+      //     const events = JSON.parse(tick.body);
+      //     commit("notifications/events", events, { root: true});
+      //   });
+      // },
+      // error => {
+      //   console.log(error);
+      //   commit("setConnected", false);
+      // }
     );
   }
 };
