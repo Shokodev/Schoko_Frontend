@@ -1,18 +1,12 @@
 <template>
   <div class="hello">
-<<<<<<< HEAD
-    <button  v-on:click="test">Click Me</button>
-    <button  v-on:click="sendSettings">Send Default Settings</button>
-    <p>{{getEvents}}
-    </p>
-=======
-    <button  v-on:click="test">Notification</button>
->>>>>>> 9643176a8e2af862071f40289642f0f556ce7463
+    <button  v-on:click="connectToWs">Verbinden</button>
+    <button  v-on:click="loadEvents">Events</button>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'HelloWorld',
   data() {
@@ -26,17 +20,16 @@ methods: {
     'connect',
     'newSettings',
     'completeHierarchy',
-    'deviceStructure'
-
-
+    'deviceStructure',
+    'subriceToEvents'
   ]),
 
-  test: function () {
+  connectToWs: function () {
     this.connect();
+  },
+  loadEvents: function () {
+    this.subriceToEvents();
   }
-},
-computed: {
-  ...mapGetters(["getEvents"]),
 },
 };
 

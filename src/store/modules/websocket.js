@@ -1,32 +1,32 @@
 import Stomp from "webstomp-client";
 
 export const state = () => ({
-  websocketURL: "ws://localhost:8098/ws/events",
+  websocketURL: "ws://localhost:8098/ws",
   connected: false
 });
 
 export const actions = {
-  connect ({ state, commit }) {
+  connect ({ state}) {
 
     if (state.connected) return;
     this.socket = new WebSocket(state.websocketURL);
     this.stompClient = Stomp.over(this.socket);
     this.stompClient.debug = msg => {}; // eslint-disable-line
     this.stompClient.connect(
-      {
-      },
-      frame => { // eslint-disable-line
-        commit("setConnected", true);
-        console.log("Subscribe");
-        this.stompClient.subscribe("/broker/eventSub", tick => {
-          const events = JSON.parse(tick.body);
-          commit("notifications/events", events, { root: true});
-        });
-      },
-      error => {
-        console.log(error);
-        commit("setConnected", false);
-      }
+      // {
+      // },
+      // frame => { // eslint-disable-line
+      //   commit("setConnected", true);
+      //   console.log("Subscribe");
+      //   this.stompClient.subscribe("/broker/eventSub", tick => {
+      //     const events = JSON.parse(tick.body);
+      //     commit("notifications/events", events, { root: true});
+      //   });
+      // },
+      // error => {
+      //   console.log(error);
+      //   commit("setConnected", false);
+      // }
     );
   }
 };
