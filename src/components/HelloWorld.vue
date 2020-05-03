@@ -2,12 +2,13 @@
   <div class="hello">
     <button  v-on:click="test">Click Me</button>
     <button  v-on:click="sendSettings">Send Default Settings</button>
-
+    <p>{{getEvents}}
+    </p>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'HelloWorld',
   data() {
@@ -29,7 +30,10 @@ methods: {
   sendSettings: function () {
     this.newSettings();
   }
-}
+},
+computed: {
+  ...mapGetters(["getEvents"]),
+},
 };
 
 

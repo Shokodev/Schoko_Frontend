@@ -1,13 +1,11 @@
-import Vue from "vue";
-
 const state = {
-eventList: []
+eventList: ["leer"]
 };
 
 
 
-const getters = {
-eventList: state => state.Eventlist
+export const getters = {
+getEvents: state => state.Eventlist
 };
 
 const mutations = {

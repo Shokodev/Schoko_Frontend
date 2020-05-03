@@ -26,7 +26,7 @@ export const actions = {
     this.stompClient.connect(
       {
       },
-      frame => { // eslint-disable-line 
+      frame => { // eslint-disable-line
         commit("setConnected", true);
         console.log("Subscribe");
         this.stompClient.subscribe("/broker/eventSub", tick => {
