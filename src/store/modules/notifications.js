@@ -5,7 +5,7 @@ eventList: []
 };
 
 export const getters = {
-eventList: state => state.Eventlist
+getEventList: state => state.eventList
 };
 
 const mutations = {
