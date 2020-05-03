@@ -1,11 +1,21 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9643176a8e2af862071f40289642f0f556ce7463
 const state = {
 eventList: ["leer"]
 };
 
+<<<<<<< HEAD
 
 
 export const getters = {
 getEvents: state => state.Eventlist
+=======
+export const getters = {
+eventList: state => state.Eventlist
+>>>>>>> 9643176a8e2af862071f40289642f0f556ce7463
 };
 
 const mutations = {
@@ -15,7 +25,8 @@ const mutations = {
 
 };
 export const actions = {
-subscribeBacnetObject({ state, commit}, bacnetObject) {
+  // eslint-disable-next-line no-unused-vars
+  subscribeBacnetObject({ state, commit}, bacnetObject) {
   if (this.stompClient && this.stompClient.connected) {
     const subscribeURL = "/objects/objectSub";
     this.stompClient.subscribe(

@@ -1,9 +1,13 @@
 <template>
   <div class="hello">
+<<<<<<< HEAD
     <button  v-on:click="test">Click Me</button>
     <button  v-on:click="sendSettings">Send Default Settings</button>
     <p>{{getEvents}}
     </p>
+=======
+    <button  v-on:click="test">Notification</button>
+>>>>>>> 9643176a8e2af862071f40289642f0f556ce7463
   </div>
 </template>
 
@@ -20,15 +24,15 @@ export default {
 methods: {
   ...mapActions([
     'connect',
-    'newSettings'
+    'newSettings',
+    'completeHierarchy',
+    'deviceStructure'
+
 
   ]),
 
   test: function () {
     this.connect();
-  },
-  sendSettings: function () {
-    this.newSettings();
   }
 },
 computed: {

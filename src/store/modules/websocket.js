@@ -5,17 +5,6 @@ export const state = () => ({
   connected: false
 });
 
-export const getters = {
-  connected: state => state.connected
-};
-
-export const mutations = {
-  setConnected(state, status) {
-    state.connected = status;
-  }
-};
-
-
 export const actions = {
   connect ({ state, commit }) {
 
@@ -42,9 +31,19 @@ export const actions = {
   }
 };
 
+export const mutations = {
+  setConnected(state, status) {
+    state.connected = status;
+  }
+};
+
+export const getters = {
+  connected: state => state.connected
+};
+
 export default {
-    state,
-    getters,
-    actions,
-    mutations
+  state,
+  actions,
+  mutations,
+  getters
 }
