@@ -1,7 +1,7 @@
 import Stomp from "webstomp-client";
 
 export const state = () => ({
-  websocketURL: "ws://localhost:8098/ws/events",
+  websocketURL: "ws://localhost:8098/ws",
   connected: false
 });
 
@@ -17,7 +17,6 @@ export const actions = {
       },
       frame => { // eslint-disable-line 
         commit("setConnected", true);
-        console.log("Subscribe");
         this.stompClient.subscribe("/broker/eventSub", tick => {
           const events = JSON.parse(tick.body);
           commit("notifications/events", events, { root: true});
