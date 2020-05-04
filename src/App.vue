@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <HelloWorld></HelloWorld>
     <section class="columns ">
       <aside id="menu" class="column is-narrow">
         <Menu  class="sticky"></Menu>
@@ -12,10 +11,9 @@
 
 <script>
 import Menu from "./components/Menu";
-import HelloWorld from "./components/HelloWorld";
 export default {
   name: 'app',
-  components: {Menu, HelloWorld}
+  components: {Menu}
 }
 
 </script>

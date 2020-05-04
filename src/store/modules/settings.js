@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const state = {
-    settings: {"port":"BAC0","siteName":"Anlage","siteDescription":"Site","bacnetSeparator":"'","localDeviceID":"1001","precisionRealValue":2}
+    settings: {"port":"BAC0","siteName":"Site01","siteDescription":"Site","bacnetSeparator":"'","localDeviceID":"1001","precisionRealValue":2}
 
 };
 export const actions = {
