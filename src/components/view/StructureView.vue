@@ -15,8 +15,6 @@
         methods: {
             ...mapActions([
                 'completeHierarchy'
-
-
             ]),
             structure: function () {
                 this.completeHierarchy();

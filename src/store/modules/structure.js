@@ -21,7 +21,7 @@ export const mutations = {
 };
 
 const getters = {
-
+    getHierarchy: state => state.structure
 };
 
 export default{
