@@ -1,9 +1,9 @@
 <template>
   <div>
-    <button  v-on:click="connectToWs">Verbinden</button>
-    <button  v-on:click="loadEvents">Events</button>
-    <button  v-on:click="loadObject">Object Laden</button>
-    <button  v-on:click="endWS">End Object</button>
+    <v-btn rounded color  v-on:click="connectToWs">Verbinden</v-btn>
+    <v-btn rounded color  v-on:click="loadEvents">Events</v-btn>
+    <v-btn rounded color  v-on:click="loadObject">Object Laden</v-btn>
+    <v-btn rounded color  v-on:click="endWS">End Object</v-btn>
   </div>
 </template>
 

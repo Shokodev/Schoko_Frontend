@@ -1,6 +1,5 @@
 <template>
     <div>
-
       <table>
         <tr>
           <th title="DatumZeit">Datum / Zeit</th>
@@ -29,7 +28,6 @@ import { mapGetters } from "vuex";
 
     export default {
         name: "Alarmlist",
-
 
 
 computed: {

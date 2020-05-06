@@ -1,12 +1,15 @@
 
 
 export const state = {
-    bacnetObject:[],
+    bacnetObject: []
 };
 
 export const getters = {
-bacnetObject: state=> state.BacNetObject
+getBacnetObject: state=> state.bacnetObject
 };
+
+
+
 const mutations = {
     subBacnetobject(state, object){
         state.bacnetObject=object;
