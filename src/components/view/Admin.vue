@@ -40,7 +40,7 @@ methods: {
     this.subscribeToBacNetObject(this.objectName);
   },
   endWS: function () {
-    this.endSubToBacNetObject(this.objectName);
+    this.endSubToBacNetObject("B'H'HGrp11CH'MxCrt'TFl");
   }
 
 },
