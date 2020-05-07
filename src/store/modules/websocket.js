@@ -3,6 +3,7 @@ import Stomp from "webstomp-client";
 export const state = () => ({
   websocketURL: "ws://localhost:8098/ws",
   connected: false
+
 });
 
 export const actions = {
@@ -13,21 +14,9 @@ export const actions = {
     this.stompClient = Stomp.over(this.socket);
     this.stompClient.debug = msg => {}; // eslint-disable-line
     this.stompClient.connect(
-      // {
-      // },
-      // frame => { // eslint-disable-line
-      //   commit("setConnected", true);
-      //   console.log("Subscribe");
-      //   this.stompClient.subscribe("/broker/eventSub", tick => {
-      //     const events = JSON.parse(tick.body);
-      //     commit("notifications/events", events, { root: true});
-      //   });
-      // },
-      // error => {
-      //   console.log(error);
-      //   commit("setConnected", false);
-      // }
+
     );
+
   }
 };
 

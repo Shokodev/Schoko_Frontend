@@ -1,9 +1,14 @@
 <template>
 <div class="settings">
   <h1 class="subheading grey--text">Einstellungen</h1>
+  <v-card
+   class="mx-auto"
+   max-width="800"
+   outlined
+ >
   <v-form>
     <v-container>
-      <v-row>
+      <v-row >
         <v-col cols="12" md="4">
           <v-text-field v-model="settings.siteName" label="Site Beschreibung" :counter="16" required></v-text-field>
         </v-col>
@@ -35,6 +40,8 @@
         </v-col>
 
       </v-row>
+       <v-divider></v-divider>
+
       <v-btn large color="blue-grey" class="white--text" @click="sendSettings()">
         Speichern
         <v-icon right dark>save</v-icon>
@@ -42,7 +49,7 @@
 
     </v-container>
   </v-form>
-
+</v-card>
 </div>
 </template>
 
