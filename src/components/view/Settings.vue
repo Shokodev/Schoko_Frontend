@@ -1,6 +1,5 @@
 <template>
-<div>
-
+<div class="text-center">
     <div>
         <label>Site Description</label>
         <input v-model="settings.siteDescription">
@@ -21,7 +20,17 @@
         <button @click="sendSettings()">Speichern</button>
     </div>
 
+    <v-btn
+      color="blue-grey"
+      class="ma-2 white--text"
+      @click="sendSettings()"
+    >
+      Speichern
+      <v-icon right dark>save</v-icon>
+    </v-btn>
 </div>
+
+
 </template>
 
 <script>

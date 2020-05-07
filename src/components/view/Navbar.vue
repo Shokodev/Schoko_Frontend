@@ -11,7 +11,7 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-navigation-drawer app v-model="drawer" class="primary" temporary>
+    <v-navigation-drawer app v-model="drawer" class="secondary" temporary>
       <v-list>
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
           <v-list-item-action>
@@ -33,13 +33,13 @@ export default {
     return {
       drawer: false,
       links: [
-        { icon: 'dashboard', text: 'Home', route: '/' },
-        { icon: 'folder', text: 'BACnet', route: '/bacnetview' },
-        { icon: 'person', text: 'Alarmliste', route: '/alarmlist' },
-        { icon: 'person', text: 'Logische Sicht', route: '/structure' },
-        { icon: 'dashboard', text: 'Gerätesicht', route: '/devices' },
-        { icon: 'folder', text: 'Einstellungen', route: '/settings' },
-        { icon: 'person', text: 'Admin', route: '/admin' },
+        { icon: 'home', text: 'Home', route: '/' },
+        { icon: 'account_tree', text: 'BACnet', route: '/bacnetview' },
+        { icon: 'notification_important', text: 'Alarmliste', route: '/alarmlist' },
+        { icon: 'device_hub', text: 'Logische Sicht', route: '/structure' },
+        { icon: 'view_agenda', text: 'Gerätesicht', route: '/devices' },
+        { icon: 'settings', text: 'Einstellungen', route: '/settings' },
+        { icon: 'healing', text: 'Admin', route: '/admin' },
       ]
     }
   }
