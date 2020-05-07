@@ -1,5 +1,6 @@
 <template>
-
+<div class="bacnetview">
+  <h1 class="subheading grey--text">BACnet Sicht</h1>
   <v-card
     class="mx-auto"
   >
@@ -30,7 +31,7 @@
   </v-card>
 
 
-
+</div>
 </template>
 
 

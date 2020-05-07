@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="admin">
+    <h1 class="subheading grey--text">Admin</h1>
     <v-container class="my-5">
 
       <v-btn rounded color  v-on:click="connectToWs">Verbinden</v-btn>

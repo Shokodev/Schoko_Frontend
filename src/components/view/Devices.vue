@@ -1,5 +1,8 @@
 <template>
+  <div class="devices">
+    <h1 class="subheading grey--text">Geräte</h1>
 <button v-on:click="devices">Device</button>
+</div>
 </template>
 
 <script>

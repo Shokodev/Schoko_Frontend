@@ -14,8 +14,6 @@
           </v-text-field>
         </v-col>
 
-
-
         <v-col cols="12" md="4">
           <v-text-field v-model="settings.bacnetSeparator" label="BACnet Seperator" :counter="1" required>
 
@@ -27,7 +25,7 @@
 
           </v-select>
         </v-col>
-        
+
         <v-col cols="12" md="4">
           <v-slider
           v-model="settings.precision"

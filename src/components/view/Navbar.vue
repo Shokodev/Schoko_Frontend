@@ -33,7 +33,7 @@ export default {
     return {
       drawer: false,
       links: [
-        { icon: 'home', text: 'Home', route: '/' },
+        { icon: 'home', text: 'Dashboard', route: '/' },
         { icon: 'account_tree', text: 'BACnet', route: '/bacnetview' },
         { icon: 'notification_important', text: 'Alarmliste', route: '/alarmlist' },
         { icon: 'device_hub', text: 'Logische Sicht', route: '/logicalview' },

@@ -1,6 +1,7 @@
 <template>
-  <div>
-  <v-data-table light
+  <div class="alarmlist">
+    <h1 class="subheading grey--text">Alarmliste</h1>
+  <v-data-table light md="2"
     :headers="headers"
     :items="getEventList"
     :items-per-page="20"

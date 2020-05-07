@@ -1,5 +1,8 @@
 <template>
+  <div class="logicalview">
+    <h1 class="subheading grey--text">Logische Sicht</h1>
     <button  v-on:click="structure">LogicalView</button>
+  </div>
 </template>
 
 <script>

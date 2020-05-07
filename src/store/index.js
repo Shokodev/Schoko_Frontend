@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import websocket from './modules/websocket'
 import notifications from './modules/notifications'
 import settings from './modules/settings'
-import LogicalView from './modules/LogicalView'
+import LogicalView from './modules/logicalView'
 import devices from "./modules/devices"
 import bacnetObject from "./modules/bacnetObject";
 
