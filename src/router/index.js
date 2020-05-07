@@ -1,5 +1,5 @@
 import Home from '../components/Menu'
-import Structure from '../components/view/StructureView'
+import LogicalView from '../components/view/LogicalView'
 import Settings from '../components/view/Settings.vue'
 import AlarmList from "../components/view/Alarmlist"
 import Devices from "../components/view/Devices"
@@ -30,9 +30,9 @@ export const routes = [
         component: Settings,
     },
     {
-        path: '/structure',
-        name: 'structure',
-        component: Structure
+        path: '/logicalview',
+        name: 'logicalview',
+        component: LogicalView
     },
     {
         path: '/devices',

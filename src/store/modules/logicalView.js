@@ -11,7 +11,7 @@ export const actions = {
     // @version 1.0
     async completeHierarchy({commit}) {
         const response = await axios.get(
-            "http://localhost:8098/hierarchy"
+            "http://localhost:8098/logicalview"
         );
         commit('setHierarchy', response.data)
     }

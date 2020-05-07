@@ -1,11 +1,12 @@
 <template>
-    <button  v-on:click="structure">Struktur</button>
+    <button  v-on:click="structure">LogicalView</button>
 </template>
 
 <script>
     import { mapActions } from 'vuex'
+
     export default {
-        name: "StructureView",
+        name: "LogicalView",
         data() {
             return {
 

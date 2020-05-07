@@ -1,27 +1,29 @@
 <template>
-    <button  v-on:click="devices">Device</button>
+<button v-on:click="devices">Device</button>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import {
+  mapActions
+} from 'vuex'
 export default {
-    name: "Devices",
-    data() {
-        return {
+  name: "Devices",
+  data() {
+    return {
 
     }
-    },
+  },
 
- methods: {
+  methods: {
     ...mapActions([
-                'deviceStructure'
+      'deviceStructure'
 
 
     ]),
-     devices: function () {
-        this.deviceStructure();
-        }
+    devices: function() {
+      this.deviceStructure();
     }
+  }
 };
 </script>
 
