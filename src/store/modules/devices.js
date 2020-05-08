@@ -5,13 +5,22 @@ export const state = {
 };
 
 export const actions = {
-    async devices({commit}) {
+
+    async loadDevices({commit}) {
         const response = await axios.get(
             "http://localhost:8098/devices"
         );
         commit('setDevices', response.data)
-    }
+    },
+
+
+async sendDevices({state}) {
+  axios.post(
+            "http://localhost:8098/devices", state.devices
+  )
+}
 };
+
 export const mutations = {
     setDevices: (state, devices) => (state.devices = devices)
 };

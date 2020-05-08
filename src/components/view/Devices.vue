@@ -1,13 +1,33 @@
 <template>
   <div class="devices">
     <h1 class="subheading grey--text">Geräte</h1>
-<button v-on:click="devices">Device</button>
+<v-btn outlined mx="4" v-on:click="devices">Device</v-btn>
+<v-btn outlined mx="4" v-on:click="sendSelectedDevices">Send Devices</v-btn>
+
+<v-card class="mx-auto"
+max-width="800"
+tile
+>
+<v-list-item v-for="device in getDevices" :key="device.name" >
+  <v-list-item-content>
+    <v-list-item-title>
+      {{ device.name }}
+    </v-list-item-title>
+  </v-list-item-content>
+</v-list-item>
+
+
+</v-card>
+
+
+
 </div>
 </template>
 
 <script>
 import {
-  mapActions
+  mapActions,
+  mapGetters
 } from 'vuex'
 export default {
   name: "Devices",
@@ -19,13 +39,22 @@ export default {
 
   methods: {
     ...mapActions([
-      'deviceStructure'
+      'loadDevices',
+      'sendDevices'
 
 
     ]),
     devices: function() {
-      this.deviceStructure();
+      this.loadDevices();
+    },
+    sendSelectedDevices: function() {
+      this.sendDevices();
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getDevices'
+    ])
   }
 };
 </script>
