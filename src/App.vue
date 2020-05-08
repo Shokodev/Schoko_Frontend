@@ -1,18 +1,13 @@
 <template>
   <div id="app">
-<<<<<<< HEAD
-=======
     <body>
     <HelloWorld></HelloWorld>
-
->>>>>>> f948b79c6a56883c0a830d67158c3803d776ffc5
     <section class="columns ">
       <aside id="menu" class="column is-narrow">
         <Menu  class="sticky"></Menu>
       </aside>
       <router-view id="content" class="column"></router-view>
     </section>
-
     </body>
   </div>
 </template>
@@ -32,7 +27,6 @@ export default {
   components: {
     Menu, HelloWorld
   },
->>>>>>> f948b79c6a56883c0a830d67158c3803d776ffc5
 
 mounted() {
   this.readSettings();
