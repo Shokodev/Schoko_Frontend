@@ -1,16 +1,23 @@
 
 
 export const state = {
-eventList: []
+  eventList:[],
+  neweventList:[]
 };
 
 export const getters = {
-getEventList: state => state.eventList
+getEventList: state => state.neweventList
 };
 
 const mutations = {
   newEvents(state, events) {
+
+  //change Date Format from ISO to LocalString
     state.eventList = events;
+    state.neweventList = state.eventList
+    for (let i = 0; i < state.eventList.length; i++) {
+      state.neweventList[i].timeStamp = new Date(state.eventList[i].timeStamp).toLocaleString()
+    }
   }
 
 };

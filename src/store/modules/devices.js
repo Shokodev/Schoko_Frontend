@@ -1,25 +1,24 @@
 import axios from 'axios';
 
 export const state = {
-    deviceStructure: {}
+    devices: {}
 };
 
 export const actions = {
-    async deviceStructure({commit}) {
+    async devices({commit}) {
         const response = await axios.get(
             "http://localhost:8098/devices"
         );
-        commit('setDeviceStructure', response.data)
+        commit('setDevices', response.data)
     }
 };
 export const mutations = {
-    setDeviceStructure: (state, deviceStructure) => (state.deviceStructure = deviceStructure)
+    setDevices: (state, devices) => (state.devices = devices)
 };
 
 export const getters = {
-
+  getDevices: state => state.devices
 };
-
 export default{
     state,
     actions,

@@ -1,41 +1,48 @@
 <template>
-    <div>
-
-      <table>
-        <tr>
-          <th title="DatumZeit">Datum / Zeit</th>
-          <th title="Objekt Name">Objekt Name</th>
-          <th title="Beschreibung">Beschreibung</th>
-          <th title="Aktueller Wert">Aktueller Wert</th>
-          <th title="Zustand">Zustand</th>
-          <th title="Reset">Reset</th>
-          <th title="Quit">Quit</th>
-          <th title="Gerät">Gerät</th>
-        </tr>
-        <tr :key="child.eventID" v-for="child in getEventList">
-          <td>{{child.timeStamp}}</td>
-          <td>{{child.objectName}}</td>
-          <td>{{child.description}}</td>
-          <td>{{child.presentValue}}</td>
-          <td>{{child.toState}}</td>
-        </tr>
-      </table>
-    </div>
+  <div class="alarmlist">
+    <h1 class="subheading grey--text">Alarmliste</h1>
+  <v-data-table light md="2"
+    :headers="headers"
+    :items="getEventList"
+    :items-per-page="20"
+    class="elevation-1"
+  ></v-data-table>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+  import {mapActions, mapGetters} from "vuex";
+
 
 
     export default {
-        name: "Alarmlist",
+      data() {
+        return {
+          headers: [
+            {
+              text: 'Alarm',
+              align: 'start',
+              sortable: false,
+              value: 'description',
+            },
+            {text: 'DatumZeit', value: 'timeStamp'},
+            {text: 'Objekt Name', value: 'objectName'},
+            {text: 'Aktueller Wert', value: 'presentValue'},
+            {text: 'Zustand', value: 'toState'},
+          ]
+        }
+      },
+
+      computed: {
+        ...mapGetters(["getEventList"])
+      },
+      methods: {
+        ...mapActions([
 
 
-
-computed: {
-  ...mapGetters(["getEventList"])
-}
-    }
+        ]),
+      }
+    };
 </script>
 
 <style scoped>

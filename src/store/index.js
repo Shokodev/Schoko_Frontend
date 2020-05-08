@@ -3,14 +3,10 @@ import Vuex from 'vuex';
 import websocket from './modules/websocket'
 import notifications from './modules/notifications'
 import settings from './modules/settings'
-import structure from './modules/structure'
-<<<<<<< HEAD
+import LogicalView from './modules/logicalView'
 import devices from "./modules/devices"
-
-=======
-import devices from "./modules/devices";
 import bacnetObject from "./modules/bacnetObject";
->>>>>>> f948b79c6a56883c0a830d67158c3803d776ffc5
+
 
 
 Vue.use(Vuex);
@@ -20,7 +16,7 @@ modules: {
   websocket,
   notifications,
   settings,
-  structure,
+  LogicalView,
   devices,
   bacnetObject
 }

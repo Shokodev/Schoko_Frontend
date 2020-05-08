@@ -1,5 +1,5 @@
-import Home from '../components/Menu'
-import Structure from '../components/view/StructureView'
+import Dashboard from '../components/view/Dashboard'
+import LogicalView from '../components/view/LogicalView'
 import Settings from '../components/view/Settings.vue'
 import AlarmList from "../components/view/Alarmlist"
 import Devices from "../components/view/Devices"
@@ -12,12 +12,12 @@ import Admin from "../components/view/Admin"
 export const routes = [
     {
         path: '/',
-        redirect: '/home'
+        redirect: '/dashboard'
     },
     {
-        path: '/home',
-        name: 'home',
-        component: Home,
+        path: '/dashboard',
+        name: 'dashboard',
+        component: Dashboard,
     },
     {
         path: '/alarmlist',
@@ -30,9 +30,9 @@ export const routes = [
         component: Settings,
     },
     {
-        path: '/structure',
-        name: 'structure',
-        component: Structure
+        path: '/logicalview',
+        name: 'logicalview',
+        component: LogicalView
     },
     {
         path: '/devices',
