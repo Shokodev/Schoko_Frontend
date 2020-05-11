@@ -27,10 +27,33 @@
             </v-select>
           </v-col>
 
-          <v-col cols="12" md="4">
-            <v-slider v-model="settings.precision" max="4" label="Präzision">
-            </v-slider>
-          </v-col>
+        <v-col cols="12" md="4">
+          <v-subheader class="pl-0">Anzahl Stellen nach Komma</v-subheader>
+          <v-slider
+          v-model="settings.precisionRealValue"
+          max="4"
+          min="0"
+          :thumb-size="17"
+          :thumb-color="slider.color"
+          :track-color="track.color"
+          :track-fill-color="trackFill.color"
+          thumb-label="always">
+          </v-slider>
+        </v-col>
+
+        <v-col cols="12" md="4">
+          <v-subheader class="pl-0">Geräte Scan Zeit in Sekunden</v-subheader>
+          <v-slider
+                  v-model="settings.scanSeconds"
+                  max="30"
+                  min="5"
+                  :thumb-size="17"
+                  :thumb-color="slider.color"
+                  :track-color="track.color"
+                  :track-fill-color="trackFill.color"
+                  thumb-label="always">
+          </v-slider>
+        </v-col>
 
         </v-row>
         <v-divider></v-divider>
@@ -61,8 +84,12 @@ export default {
         siteDescription: "Description",
         bacnetSeparator: "'",
         localDeviceID: "100010",
-        precision: "2"
+        precisionRealValue: 2,
+        scanSeconds: 5
       },
+      track: { label: 'track-color', color: 'light-black lighten-8' },
+      trackFill: { label: 'track-fill-color', color: 'grey lighten-6' },
+      slider: { label: 'thumb-color', color: 'grey' },
       max: 4,
       dummyValue: 27.2486,
       bacnetPorts: [
@@ -93,19 +120,22 @@ export default {
   },
   methods: {
     ...mapActions([
-      'newSettings'
+      'newSettings',
+      'readSettings'
     ]),
     sendSettings: function() {
       this.newSettings(this.settings);
     },
   },
   mounted() {
+    this.readSettings();
     this.settings.siteDescription = this.getSettings.siteDescription;
     this.settings.siteName = this.getSettings.siteName;
     this.settings.port = this.getSettings.port;
     this.settings.bacnetSeparator = this.getSettings.bacnetSeparator;
     this.settings.localDeviceID = this.getSettings.localDeviceID;
-    this.settings.precision = this.getSettings.precision;
+    this.settings.precisionRealValue = this.getSettings.precisionRealValue;
+    this.settings.scanSeconds = this.getSettings.scanSeconds;
   }
 };
 </script>
