@@ -1,37 +1,43 @@
 import axios from 'axios';
 
 export const state = {
-    devices: {}
+  devices: [],
+  syncdDevices: [],
+  devicesInitialized: false
 };
 
 export const actions = {
 
-    async loadDevices({commit}) {
-        const response = await axios.get(
-            "http://localhost:8098/devices"
-        );
-        commit('setDevices', response.data)
-    },
+  async loadDevices({
+    commit
+  }) {
+    const response = await axios.get(
+      "http://localhost:8098/devices"
+    );
+    commit('setDevices', response.data)
+  },
 
 
-async sendDevices({state}) {
-  axios.post(
-            "http://localhost:8098/devices", state.devices
-  )
-}
+  async sendDevices( {commit}, selectedDevices) {
+    commit('syncDevices', selectedDevices);
+    axios.post(
+      "http://localhost:8098/devices", selectedDevices
+    )
+  }
 };
 
 export const mutations = {
-    setDevices: (state, devices) => (state.devices = devices)
+  setDevices: (state, devices) => (state.devices = devices),
+  syncDevices: (state, devices) => (state.syncdDevices = devices)
 };
 
 export const getters = {
   getDevices: state => state.devices
 };
-export default{
-    state,
-    actions,
-    mutations,
-    getters
+export default {
+  state,
+  actions,
+  mutations,
+  getters
 
 };

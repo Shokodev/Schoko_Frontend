@@ -1,55 +1,48 @@
 <template>
 <div class="settings">
   <h1 class="subheading grey--text">Einstellungen</h1>
-  <v-card
-   class="mx-auto"
-   max-width="800"
-   outlined
- >
-  <v-form>
-    <v-container>
-      <v-row >
-        <v-col cols="12" md="4">
-          <v-text-field v-model="settings.siteName" label="Site Beschreibung" :counter="16" required></v-text-field>
-        </v-col>
+  <v-card class="mx-auto" max-width="800" outlined>
+    <v-form>
+      <v-container>
+        <v-row>
+          <v-col cols="12" md="4">
+            <v-text-field v-model="settings.siteName" label="Site Beschreibung" :counter="16" required></v-text-field>
+          </v-col>
 
-        <v-col cols="12" md="4">
-          <v-text-field v-model="settings.localDeviceID" label="Device ID" :counter="8" required>
+          <v-col cols="12" md="4">
+            <v-text-field v-model="settings.localDeviceID" label="Device ID" :counter="8" required>
 
-          </v-text-field>
-        </v-col>
+            </v-text-field>
+          </v-col>
 
-        <v-col cols="12" md="4">
-          <v-text-field v-model="settings.bacnetSeparator" label="BACnet Seperator" :counter="1" required>
+          <v-col cols="12" md="4">
+            <v-text-field v-model="settings.bacnetSeparator" label="BACnet Seperator" :counter="1" required>
 
-          </v-text-field>
-        </v-col>
+            </v-text-field>
+          </v-col>
 
-        <v-col cols="12" md="4">
-          <v-select v-model="settings.port" label="BACnet Port" :items="bacnetPorts" :rules="[v => !!v || 'BACnet Port is required']" required>
+          <v-col cols="12" md="4">
+            <v-select v-model="settings.port" label="BACnet Port" :items="bacnetPorts" :rules="[v => !!v || 'BACnet Port is required']" required>
 
-          </v-select>
-        </v-col>
+            </v-select>
+          </v-col>
 
-        <v-col cols="12" md="4">
-          <v-slider
-          v-model="settings.precision"
-          max="4"
-          label="Präzision">
-          </v-slider>
-        </v-col>
+          <v-col cols="12" md="4">
+            <v-slider v-model="settings.precision" max="4" label="Präzision">
+            </v-slider>
+          </v-col>
 
-      </v-row>
-       <v-divider></v-divider>
+        </v-row>
+        <v-divider></v-divider>
 
-      <v-btn large color="blue-grey" class="white--text" @click="sendSettings()">
-        Speichern
-        <v-icon right dark>save</v-icon>
-      </v-btn>
+        <v-btn large color="blue-grey" class="white--text" @click="sendSettings()">
+          Speichern
+          <v-icon right dark>save</v-icon>
+        </v-btn>
 
-    </v-container>
-  </v-form>
-</v-card>
+      </v-container>
+    </v-form>
+  </v-card>
 </div>
 </template>
 
