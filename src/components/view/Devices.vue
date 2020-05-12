@@ -7,11 +7,11 @@
       <v-row>
 
 
-        <v-col cols="6" sm="6">
+        <v-col cols="12" sm="6">
           <v-subheader v-text="'Kontroller auswählen'"></v-subheader>
         </v-col>
 
-        <v-col cols="6" sm="6">
+        <v-col cols="12" sm="6">
           <v-select
             v-model="selectedDevices"
             :items="getDevices"
