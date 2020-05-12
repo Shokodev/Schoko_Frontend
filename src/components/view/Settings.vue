@@ -5,9 +5,6 @@
     <v-form>
       <v-container>
         <v-row>
-          <v-col cols="12" md="4">
-            <v-text-field v-model="settings.siteName" label="Site Beschreibung" :counter="16" required></v-text-field>
-          </v-col>
 
           <v-col cols="12" md="4">
             <v-text-field v-model="settings.localDeviceID" label="Device ID" :counter="8" required>
@@ -23,7 +20,6 @@
 
           <v-col cols="12" md="4">
             <v-select v-model="settings.port" label="BACnet Port" :items="bacnetPorts" :rules="[v => !!v || 'BACnet Port is required']" required>
-
             </v-select>
           </v-col>
 
@@ -79,9 +75,7 @@ export default {
   data() {
     return {
       settings: {
-        siteName: "DefaultSite",
         port: "BAC0",
-        siteDescription: "Description",
         bacnetSeparator: "'",
         localDeviceID: "100010",
         precisionRealValue: 2,
@@ -129,8 +123,6 @@ export default {
   },
   mounted() {
     this.readSettings();
-    this.settings.siteDescription = this.getSettings.siteDescription;
-    this.settings.siteName = this.getSettings.siteName;
     this.settings.port = this.getSettings.port;
     this.settings.bacnetSeparator = this.getSettings.bacnetSeparator;
     this.settings.localDeviceID = this.getSettings.localDeviceID;
