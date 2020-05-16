@@ -49,33 +49,8 @@
     </v-row>
   </v-container>
 </v-card>
+  
 </div>
-  <div class="text-center">
-    <v-btn
-            color="error"
-            @click="overlay = !overlay"
-    >
-      Show Overlay
-    </v-btn>
-
-    <v-overlay :value="overlay">
-      <v-btn
-              icon
-              @click="overlay = false"
-      >
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-      <v-progress-circular
-              :rotate="-90"
-              :size="100"
-              :width="15"
-              :value="value"
-              color="primary"
-      >
-        {{ value }}
-      </v-progress-circular>
-    </v-overlay>
-  </div>
 </template>
 
 
