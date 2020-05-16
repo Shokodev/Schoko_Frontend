@@ -32,7 +32,7 @@ export const actions = {
       "http://localhost:8098/devices", selectedDevices
     ).then(res => {
       if(res.status === 200) {
-        this.preloadDevices();
+        this.dispatch('preloadDevices');
       }
     });
   }
