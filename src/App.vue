@@ -10,6 +10,7 @@
 
 <script>
 import Navbar from './components/view/Navbar'
+import { mapActions } from 'vuex'
 
 export default {
   components: { Navbar },
@@ -18,6 +19,33 @@ export default {
     return {
 
     }
+  },
+
+  created() {
+    //do something after creating vue instance
+      this.connect();
+  },
+
+
+watch: {
+  isWsConnected: function() {
+    this.loadEvents
   }
+},
+
+  methods: {
+    ...mapActions([
+      'connect',
+      'subriceToEvents',
+
+    ]),
+
+
+    loadEvents: function () {
+      this.subriceToEvents();
+    }
+
+  },
+
 }
 </script>

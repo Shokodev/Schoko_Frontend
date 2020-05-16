@@ -19,7 +19,6 @@ const mutations = {
       state.neweventList[i].timeStamp = new Date(state.eventList[i].timeStamp).toLocaleString()
     }
   }
-
 };
 export const actions = {
   // eslint-disable-next-line no-unused-vars

@@ -2,22 +2,25 @@ import Stomp from "webstomp-client";
 
 export const state = () => ({
   websocketURL: "ws://localhost:8098/ws",
-  connected: false
-
+  connected: false,
+  connect_callback: {},
+  error_callback: {},
+  frame: {}
 });
 
 export const actions = {
-  connect ({ state}) {
+  connect ({ state, commit }) {
 
     if (state.connected) return;
     this.socket = new WebSocket(state.websocketURL);
     this.stompClient = Stomp.over(this.socket);
     this.stompClient.debug = msg => {}; // eslint-disable-line
-    this.stompClient.connect(
-
-    );
-
-  }
+    console.log("ws is connecting")
+    this.stompClient.connect( {},  frame => {
+      commit("setConnected", frame.command)
+      this.dispatch('subriceToEvents', null, {root: true})
+    })
+  },
 };
 
 export const mutations = {
@@ -27,7 +30,7 @@ export const mutations = {
 };
 
 export const getters = {
-  connected: state => state.connected
+  getConnecionState: state => state.connected
 };
 
 export default {
