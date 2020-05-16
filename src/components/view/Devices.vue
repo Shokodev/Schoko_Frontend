@@ -22,10 +22,10 @@
           ></v-select>
         </v-col>
           <v-col cols="12" md="6">
-            <v-btn outlined v-on:click="devices">Geräte suchen</v-btn>
+            <v-btn outlined v-on:click="devices" >Geräte suchen</v-btn>
           </v-col>
           <v-col cols="12" md="6">
-            <v-btn outlined v-on:click="sendSelectedDevices">Auswahl senden</v-btn>
+            <v-btn outlined v-on:click="sendSelectedDevices" >Auswahl importieren</v-btn>
           </v-col>
       </v-row>
     </v-container>
@@ -34,25 +34,41 @@
 <v-card lightgrey class="mx-auto" max-width="800" v-for="devices in getDevices" :key="devices.name" >
   <v-container fluid>
     <v-row>
-      <v-col cols="6" sm="3" >
+      <v-col sm="3">
         <v-card-title>{{devices.name}}</v-card-title>
+      </v-col>
+      <v-col>
         <v-subheader v-text="devices.modelName"></v-subheader>
       </v-col>
-      <v-col cols="6" sm="3" >
+      <v-col>
         <v-subheader v-text="devices.description"></v-subheader>
       </v-col>
-      <v-col cols="6" sm="3" >
+      <v-col>
+        <v-subheader v-text="devices.instanceNumber"></v-subheader>
       </v-col>
-      <v-col cols="6" sm="3" >
+      <v-col>
       <v-chip v-if="devices.alreadyImported" color="green">Importiert</v-chip>
       </v-col>
     </v-row>
   </v-container>
 </v-card>
-  
+
+  <div class="text-center">
+      <v-overlay
+              :value="isOverlayActive"
+              :opacity="0.7"
+      >
+        <v-progress-circular
+                :size="200"
+                :width="10"
+                color=#FAFAFA
+                indeterminate
+        >{{loadingText}}</v-progress-circular>
+      </v-overlay>
+    </div>
+
 </div>
 </template>
-
 
 <script>
 import {
@@ -64,8 +80,8 @@ export default {
   name: "Devices",
   data() {
     return {
-      overlay: false,
-      selectedDevices: []
+      selectedDevices: [],
+      loadingText: ""
     }
   },
 
@@ -77,10 +93,12 @@ export default {
     ]),
 
     devices: function() {
+      this.loadingText = "Geräte suchen...";
       this.loadDevices();
     },
 
     sendSelectedDevices: function() {
+      this.loadingText = "Geräte importieren...";
       this.sendDevices(this.selectedDevices);
       console.log(this.selectedDevices)
     }
@@ -88,7 +106,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'getDevices'
+      'getDevices',
+      'isOverlayActive',
     ])
   },
 
