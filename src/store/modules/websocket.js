@@ -18,7 +18,8 @@ export const actions = {
     console.log("ws is connecting")
     this.stompClient.connect( {},  frame => {
       commit("setConnected", frame.command)
-      this.dispatch('subriceToEvents', null, {root: true})
+      this.dispatch('subriceToEvents', null, {root: true});
+      this.dispatch('fetchEvents', null, {root: true});
     })
   },
 };
