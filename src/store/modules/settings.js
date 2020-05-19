@@ -2,7 +2,11 @@ import axios from 'axios';
 
 export const state = {
 
-    settings: {"port":"BAC0","localDeviceID":"1001","precisionRealValue":2,"scanSeconds":5}
+    settings: {"port":"BAC0","localDeviceID":"1001","precisionRealValue":2,"scanSeconds":5},
+
+    host:  { "ip":"127.0.0.1",
+              "port":"8098"
+            }
 
 };
 export const actions = {
@@ -11,9 +15,14 @@ export const actions = {
     // Maybe add a timeout if the server is down
     // @author Vogt Andreas,Daniel Reiter, Rafael Grimm
     // @version 1.0
-    async newSettings({ commit },settings)  {
+
+    setHostConnection({ commit }, host) {
+      commit('hostSettings', host)
+    },
+
+    async newSettings({ state, commit },settings)  {
         axios.post(
-            "http://localhost:8098/settings", settings
+            "http://" + state.host.ip +":"+ state.host.port + "/settings", settings
         )
             .then( res => {
                 commit('setSettings', res.data);
@@ -26,18 +35,21 @@ export const actions = {
     // @version 1.0
     async readSettings({commit}) {
         const response = await axios.get(
-            "http://localhost:8098/settings"
+            "http://" + state.host.ip +":"+ state.host.port + "/settings"
         );
         commit('backendSettings', response.data);
     }
 };
 export const mutations = {
     setSettings: (state, settings) => (state.settings = settings),
-    backendSettings: (state, settings) => (state.settings = settings)
+    backendSettings: (state, settings) => (state.settings = settings),
+    hostSettings: (state, host ) => (state.host = host)
 };
 
 export const getters = {
-    getSettings: state => state.settings
+    getSettings: state => state.settings,
+    getHostIp: state => state.host.ip,
+    getHostPort: state => state.host.port,
 };
 
 export default {
@@ -45,5 +57,4 @@ export default {
     actions,
     mutations,
     getters
-
 }

@@ -52,7 +52,7 @@ export default {
 
 
     httpReq : async() => {
-      return axios.get("http://localhost:8098/hierarchy")
+      return axios.get("http://192.168.0.33:8098/hierarchy")
     }
   },
   computed: {
