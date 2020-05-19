@@ -3,25 +3,16 @@
   <h1 class="subheading grey--text">BACnet Sicht</h1>
   <v-container>
 
-<v-row
-cols="1"
->
-<v-card
-  class="mx-auto" max-width="800" outlined
->
-<v-btn block color="secondary" dark>Block Button</v-btn>
-</v-card>
-</v-row>
 
-<v-row
-cols="1"
+<v-btn v-on:click="loadSite" block color="secondary" dark>load</v-btn>
+
+<v-divider></v-divider>
+
+<StructureView
+:node="nodeChildren"
 >
-<v-card
-  class="mx-auto" max-width="800" outlined
->
-<v-btn block color="secondary" dark>Block Button</v-btn>
-</v-card>
-</v-row>
+</StructureView>
+
 
   </v-container>
 
@@ -33,36 +24,35 @@ cols="1"
 <script>
 import axios from 'axios';
 import { mapGetters } from "vuex";
+import StructureView from "./StructureView"
 
 export default {
   name: "BacnetView",
   data() {
     return {
+      nodeChildren : {
+        objectName: "Nodes konnten nicht geladen werden",
+        description: "Einstellungen Prüfen"
+      },
     }
   },
 
-  mounted() {
-
+  components: {
+    StructureView
   },
+
 
   methods: {
      loadSite: async function() {
-      let siteNode = await this.httpReq("Site01")
-      this.nodeChildren = siteNode.data.children
+      let siteNode = await this.httpReq()
+      this.nodeChildren = siteNode.data
         console.log(this.nodeChildren)
       },
-    loadChildren: function(child) {
-      this.nodeParent = child; // Does not work..
-      this.nodeChildren = child.children;
-      console.log(child.children)
-    },
-    loadParent: function() {
-      console.log(this.nodeParent)
-      this.nodeChildren = this.nodeParent.children;
-      console.log(this.nodeChildren)
-    },
-    httpReq : async(path) => {
-      return axios.get("http://localhost:8098/structure/" + path)
+
+
+
+    httpReq : async() => {
+      return axios.get("http://localhost:8098/hierarchy")
     }
   },
   computed: {

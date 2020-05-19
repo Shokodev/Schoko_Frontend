@@ -1,6 +1,6 @@
 <template>
 <div class="devices">
-  <h1 class="subheading grey--text">Geräte</h1>
+  <h1 class="subheading grey--text">Geräte Suche</h1>
 <v-card class="mx-auto" max-width="800" outlined>
     <v-container fluid>
       <v-row>
@@ -31,52 +31,19 @@
     </v-container>
 </v-card>
 
-<v-card lightgrey class="mx-auto" max-width="800" v-for="devices in getDevices" :key="devices.name" >
-  <v-container>
-    <v-layout row>
-      <v-flex md2>
-        <v-subheader v-text="devices.name"></v-subheader>
-      </v-flex>
-      <v-flex md6>
-        <v-subheader v-text="devices.modelName"></v-subheader>
-      </v-flex>
-    </v-layout>
-    <v-layout row>
-      <v-flex md2>
-        <v-subheader v-text="devices.name"></v-subheader>
-      </v-flex>
-      <v-flex md6>
-        <v-subheader v-text="devices.modelName"></v-subheader>
-      </v-flex>
-    </v-layout>
-    <v-layout row>
-      <v-flex md2>
-        <v-subheader v-text="devices.name"></v-subheader>
-      </v-flex>
-      <v-flex md6>
-        <v-subheader v-text="devices.modelName"></v-subheader>
-      </v-flex>
-    </v-layout>
-
-    <v-row>
-      <v-col sm="3">
-        <v-card-title></v-card-title>
-      </v-col>
-      <v-col>
-        <v-subheader v-text="devices.modelName"></v-subheader>
-      </v-col>
-      <v-col>
-        <v-subheader v-text="devices.description"></v-subheader>
-      </v-col>
-      <v-col>
-        <v-subheader v-text="devices.instanceNumber"></v-subheader>
-      </v-col>
-      <v-col>
-      <v-chip v-if="devices.alreadyImported" color="green">Importiert</v-chip>
-      </v-col>
-    </v-row>
-  </v-container>
-</v-card>
+  <div>
+    <h1 class="subheading grey--text">Geräteliste</h1>
+    <v-data-table light md="2"
+                  :headers="headers"
+                  :items="getDevices"
+                  class="elevation-1"
+                  hide-default-footer
+    >
+    <template v-slot:item.alreadyImported="{ item }">
+      <v-checkbox v-model="item.alreadyImported" disabled></v-checkbox>
+    </template>
+    </v-data-table>
+  </div>
 
   <div class="text-center">
       <v-overlay
@@ -91,7 +58,6 @@
         >{{loadingText}}</v-progress-circular>
       </v-overlay>
     </div>
-
 </div>
 </template>
 
@@ -100,49 +66,50 @@ import {
   mapActions,
   mapGetters
 } from 'vuex'
-
 export default {
   name: "Devices",
   data() {
     return {
       selectedDevices: [],
-      loadingText: ""
+      loadingText: "",
+      headers: [
+        {text: 'Gerät', value: 'name'},
+        {text: 'Gerätetyp', value: 'modelName'},
+        {text: 'Adresse', value: 'description'},
+        {
+          text: 'Importiert',
+          value: 'alreadyImported'
+        }
+      ],
     }
-  },
-
+    },
   methods: {
     ...mapActions([
       'loadDevices',
       'sendDevices',
       'preloadDevices'
     ]),
-
     devices: function() {
       this.loadingText = "Geräte suchen...";
       this.loadDevices();
     },
-
     sendSelectedDevices: function() {
       this.loadingText = "Geräte importieren...";
       this.sendDevices(this.selectedDevices);
       console.log(this.selectedDevices)
     }
   },
-
   computed: {
     ...mapGetters([
       'getDevices',
       'isOverlayActive',
     ])
   },
-
   mounted() {
     this.preloadDevices();
   }
-
 };
 </script>
 
 <style scoped>
-
 </style>
