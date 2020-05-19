@@ -41,8 +41,22 @@
         <v-subheader v-text="devices.modelName"></v-subheader>
       </v-flex>
     </v-layout>
-
-
+    <v-layout row>
+      <v-flex md2>
+        <v-subheader v-text="devices.name"></v-subheader>
+      </v-flex>
+      <v-flex md6>
+        <v-subheader v-text="devices.modelName"></v-subheader>
+      </v-flex>
+    </v-layout>
+    <v-layout row>
+      <v-flex md2>
+        <v-subheader v-text="devices.name"></v-subheader>
+      </v-flex>
+      <v-flex md6>
+        <v-subheader v-text="devices.modelName"></v-subheader>
+      </v-flex>
+    </v-layout>
 
     <v-row>
       <v-col sm="3">
