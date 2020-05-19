@@ -2,26 +2,27 @@
 <div class="bacnetview">
   <h1 class="subheading grey--text">BACnet Sicht</h1>
   <v-container>
-    
-<v-col
-cols="12"
->
-<v-card
-  class="mx-auto" max-width="800" outlined
->
-<v-btn block color="secondary" dark>Block Button</v-btn>
-</v-card>
-</v-col>
 
-<v-col
-cols="12"
+<v-row
+cols="1"
 >
 <v-card
   class="mx-auto" max-width="800" outlined
 >
 <v-btn block color="secondary" dark>Block Button</v-btn>
 </v-card>
-</v-col>
+</v-row>
+
+<v-row
+cols="1"
+>
+<v-card
+  class="mx-auto" max-width="800" outlined
+>
+<v-btn block color="secondary" dark>Block Button</v-btn>
+</v-card>
+</v-row>
+
   </v-container>
 
 

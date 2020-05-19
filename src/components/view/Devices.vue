@@ -32,10 +32,21 @@
 </v-card>
 
 <v-card lightgrey class="mx-auto" max-width="800" v-for="devices in getDevices" :key="devices.name" >
-  <v-container fluid>
+  <v-container>
+    <v-layout row>
+      <v-flex md2>
+        <v-subheader v-text="devices.name"></v-subheader>
+      </v-flex>
+      <v-flex md6>
+        <v-subheader v-text="devices.modelName"></v-subheader>
+      </v-flex>
+    </v-layout>
+
+
+
     <v-row>
       <v-col sm="3">
-        <v-card-title>{{devices.name}}</v-card-title>
+        <v-card-title></v-card-title>
       </v-col>
       <v-col>
         <v-subheader v-text="devices.modelName"></v-subheader>
