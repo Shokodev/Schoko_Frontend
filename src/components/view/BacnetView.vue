@@ -1,75 +1,49 @@
 <template>
-<div class="bacnetview">
+  <div class="bacnetview">
   <h1 class="subheading grey--text">BACnet Sicht</h1>
-  <v-container>
-    
-<v-col
-cols="12"
->
-<v-card
-  class="mx-auto" max-width="800" outlined
->
-<v-btn block color="secondary" dark>Block Button</v-btn>
-</v-card>
-</v-col>
+    <v-container >
 
-<v-col
-cols="12"
->
-<v-card
-  class="mx-auto" max-width="800" outlined
->
-<v-btn block color="secondary" dark>Block Button</v-btn>
-</v-card>
-</v-col>
-  </v-container>
+      <v-btn  v-on:click="loadSite" block color="secondary" dark>load Site</v-btn>
+
+    <tree-view v-for="node in nodes"></tree-view>
+
+    </v-container>
 
 
-</div>
+
+  </div>
 </template>
 
 
 <script>
 import axios from 'axios';
+import TreeView from './TreeView.vue'
 import { mapGetters } from "vuex";
 
 export default {
   name: "BacnetView",
   data() {
     return {
+      siteNodes: [],
     }
   },
 
-  mounted() {
-
+  components: {
+    TreeView
   },
 
   methods: {
      loadSite: async function() {
-      let siteNode = await this.httpReq("Site01")
-      this.nodeChildren = siteNode.data.children
-        console.log(this.nodeChildren)
+      let fetchedNodes = await this.httpReq()
+      this.siteNodes = fetchedNodes.data.children
+        console.log(this.siteNodes)
       },
-    loadChildren: function(child) {
-      this.nodeParent = child; // Does not work..
-      this.nodeChildren = child.children;
-      console.log(child.children)
-    },
-    loadParent: function() {
-      console.log(this.nodeParent)
-      this.nodeChildren = this.nodeParent.children;
-      console.log(this.nodeChildren)
-    },
-    httpReq : async(path) => {
-      return axios.get("http://localhost:8098/structure/" + path)
+
+    httpReq : async() => {
+      return axios.get("http://localhost:8098/hierarchy")
     }
   },
   computed: {
-    filter () {
-    return this.caseSensitive
-      ? (item, search, textKey) => item[textKey].indexOf(search) > -1
-      : undefined
-  },
     ...mapGetters(["getBacnetObject"])
   },
 
