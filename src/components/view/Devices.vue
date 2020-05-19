@@ -66,7 +66,6 @@ import {
   mapActions,
   mapGetters
 } from 'vuex'
-
 export default {
   name: "Devices",
   data() {
@@ -84,40 +83,33 @@ export default {
       ],
     }
     },
-
   methods: {
     ...mapActions([
       'loadDevices',
       'sendDevices',
       'preloadDevices'
     ]),
-
     devices: function() {
       this.loadingText = "Geräte suchen...";
       this.loadDevices();
     },
-
     sendSelectedDevices: function() {
       this.loadingText = "Geräte importieren...";
       this.sendDevices(this.selectedDevices);
       console.log(this.selectedDevices)
     }
   },
-
   computed: {
     ...mapGetters([
       'getDevices',
       'isOverlayActive',
     ])
   },
-
   mounted() {
     this.preloadDevices();
   }
-
 };
 </script>
 
 <style scoped>
-
 </style>
