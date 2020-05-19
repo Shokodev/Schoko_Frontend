@@ -1,34 +1,20 @@
 <template>
   <div class="bacnetview">
-  <h1 class="subheading grey--text">BACnet Sicht</h1>
-  <v-container>
-
-
-<v-btn v-on:click="loadSite" block color="secondary" dark>load</v-btn>
-
-<v-divider></v-divider>
-
-<StructureView
-:node="nodeChildren"
->
-</StructureView>
-
-
-  </v-container>
-
-    <tree-view v-for="node in nodes"></tree-view>
-
+    <h1 class="subheading grey--text">BACnet Sicht</h1>
+    <v-container>
+      <v-btn v-on:click="loadSite" block color="secondary" dark>load</v-btn>
+      <StructureView
+      :node="nodeChildren"
+      >
+      </StructureView>
     </v-container>
-
-
-
   </div>
 </template>
 
 
 <script>
 import axios from 'axios';
-import TreeView from './TreeView.vue'
+
 import { mapGetters } from "vuex";
 import StructureView from "./StructureView"
 
