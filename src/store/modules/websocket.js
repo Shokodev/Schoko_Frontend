@@ -1,7 +1,6 @@
 import Stomp from "webstomp-client";
 
 export const state = () => ({
-  websocketURL: "ws://localhost:8098/ws",
   connected: false,
   connect_callback: {},
   error_callback: {},
@@ -9,10 +8,10 @@ export const state = () => ({
 });
 
 export const actions = {
-  connect ({ state, commit }) {
+  connect ({ state, commit, rootState }) {
 
     if (state.connected) return;
-    this.socket = new WebSocket(state.websocketURL);
+    this.socket = new WebSocket("ws://" + rootState.settings.host.ip +":"+rootState.settings.host.port + "/ws" );
     this.stompClient = Stomp.over(this.socket);
     this.stompClient.debug = msg => {}; // eslint-disable-line
     console.log("ws is connecting")

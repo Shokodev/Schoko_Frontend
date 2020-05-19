@@ -54,14 +54,37 @@
         </v-row>
         <v-divider></v-divider>
 
-        <v-btn large color="blue-grey" class="white--text" @click="sendSettings()">
-          Speichern
-          <v-icon right dark>save</v-icon>
-        </v-btn>
+
 
       </v-container>
     </v-form>
   </v-card>
+
+<v-card class="mx-auto" max-width="800" outlined>
+  <v-form>
+    <v-container>
+      <v-row>
+        <v-col cols="12" md="4">
+          <v-text-field v-model="host.ip" label="Host IP" :counter="15" required>
+
+            </v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="4">
+            <v-text-field v-model="host.port" label="Host Port" :counter="4" required>
+
+          </v-text-field>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-form>
+</v-card>
+
+<v-btn large color="blue-grey" class="white--text" @click="sendSettings()">
+  Speichern
+  <v-icon right dark>save</v-icon>
+</v-btn>
+
 </div>
 </template>
 
@@ -81,6 +104,11 @@ export default {
         precisionRealValue: 2,
         scanSeconds: 5
       },
+      host: {
+        "ip": "",
+        "port": "",
+      },
+
       track: { label: 'track-color', color: 'light-black lighten-8' },
       trackFill: { label: 'track-fill-color', color: 'grey lighten-6' },
       slider: { label: 'thumb-color', color: 'grey' },
@@ -109,17 +137,26 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getSettings"
+      "getSettings",
+      "getHostIp",
+      "getHostPort",
     ]),
   },
   methods: {
     ...mapActions([
       'newSettings',
-      'readSettings'
+      'readSettings',
+      'setHostConnection',
+      'connect',
     ]),
+
+
     sendSettings: function() {
+      this.setHostConnection(this.host);
       this.newSettings(this.settings);
+      this.connect();
     },
+
   },
   mounted() {
     this.readSettings();
@@ -128,6 +165,8 @@ export default {
     this.settings.localDeviceID = this.getSettings.localDeviceID;
     this.settings.precisionRealValue = this.getSettings.precisionRealValue;
     this.settings.scanSeconds = this.getSettings.scanSeconds;
+    this.host.ip = this.getHostIp;
+    this.host.port = this.getHostPort;
   }
 };
 </script>

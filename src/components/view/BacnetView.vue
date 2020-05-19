@@ -1,9 +1,20 @@
 <template>
   <div class="bacnetview">
   <h1 class="subheading grey--text">BACnet Sicht</h1>
-    <v-container >
+  <v-container>
 
-      <v-btn  v-on:click="loadSite" block color="secondary" dark>load Site</v-btn>
+
+<v-btn v-on:click="loadSite" block color="secondary" dark>load</v-btn>
+
+<v-divider></v-divider>
+
+<StructureView
+:node="nodeChildren"
+>
+</StructureView>
+
+
+  </v-container>
 
     <tree-view v-for="node in nodes"></tree-view>
 
@@ -19,28 +30,35 @@
 import axios from 'axios';
 import TreeView from './TreeView.vue'
 import { mapGetters } from "vuex";
+import StructureView from "./StructureView"
 
 export default {
   name: "BacnetView",
   data() {
     return {
-      siteNodes: [],
+      nodeChildren : {
+        objectName: "Nodes konnten nicht geladen werden",
+        description: "Einstellungen Prüfen"
+      },
     }
   },
 
   components: {
-    TreeView
+    StructureView
   },
+
 
   methods: {
      loadSite: async function() {
-      let fetchedNodes = await this.httpReq()
-      this.siteNodes = fetchedNodes.data.children
-        console.log(this.siteNodes)
+      let siteNode = await this.httpReq()
+      this.nodeChildren = siteNode.data
+        console.log(this.nodeChildren)
       },
 
+
+
     httpReq : async() => {
-      return axios.get("http://localhost:8098/hierarchy")
+      return axios.get("http://192.168.0.33:8098/hierarchy")
     }
   },
   computed: {
