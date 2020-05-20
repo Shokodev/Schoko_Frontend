@@ -67,7 +67,10 @@
         computed: {
           ...mapGetters([
             'getLogicalView'
-          ])
+          ]),
+          fullName: function() {
+            return "bla"
+          }
         }
     };
 </script>

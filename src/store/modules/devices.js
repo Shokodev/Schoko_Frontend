@@ -8,27 +8,27 @@ export const state = {
 
 export const actions = {
 
-  async loadDevices({commit}) {
+  async loadDevices({commit, rootState }) {
     commit('setLoadingActive', true);
     const response = await axios.get(
-      "http://localhost:8098/devices"
+      "http://" + rootState.settings.host.ip +":"+rootState.settings.host.port + "/devices"
     )
     commit('setDevices', response.data);
     commit('setLoadingActive', false);
   },
 
-  async preloadDevices({commit}) {
+  async preloadDevices({commit, rootState}) {
     const response = await axios.get(
-        "http://localhost:8098/preload/devices"
+        "http://" + rootState.settings.host.ip +":"+rootState.settings.host.port + "/preload/devices"
     );
     commit('preloadDevices', response.data)
   },
 
-  async sendDevices({commit}, selectedDevices) {
+  async sendDevices({commit, rootState}, selectedDevices) {
     commit('syncDevices', selectedDevices);
     commit('setLoadingActive', true);
     axios.post(
-      "http://localhost:8098/devices", selectedDevices
+      "http://" + rootState.settings.host.ip +":"+rootState.settings.host.port + "/devices", selectedDevices
     ).then(res => {
       if(res.status === 200) {
         this.dispatch('preloadDevices');
