@@ -48,7 +48,7 @@ export const actions = {
   ackEvent({ commit },objectName){
     commit('commitScopedObjectName',objectName);
     const subscribeURL = "/app/ack";
-    this.stompClient.send(subscribeURL, JSON.stringify(state.scopedObjectName), {});
+    this.stompClient.send(subscribeURL, state.scopedObjectName, {});
   },
 };
 

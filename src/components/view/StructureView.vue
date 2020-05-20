@@ -3,13 +3,14 @@
   :style="{'margin-left' : '${depth * 20'}"
   >
 
-    <v-btn @click="openNode" block color="secondary" dark>{{node.objectName}} ({{node.description}})</v-btn>
+    <v-btn @click="openNode" block color="secondary" dark>{{nodeName}} ({{node.description}})</v-btn>
 
     <div v-if="expanded">
       <StructureView
       v-for="child in node.children"
       :node="child"
-      :key="child.objectName"
+      :name="name"
+      :key="child.nodeName"
       />
     </div>
 
@@ -21,6 +22,7 @@
     name: 'StructureView',
     props: {
       node: Object,
+      name: String
     },
     data() {
       return {
@@ -31,6 +33,9 @@
     computed: {
       hasChildren() {
         return this.node.children;
+      },
+      nodeName(){
+        return this.node[this.name];
       }
     },
 

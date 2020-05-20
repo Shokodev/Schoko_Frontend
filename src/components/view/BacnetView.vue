@@ -5,6 +5,7 @@
       <v-btn v-on:click="loadSite" block color="secondary" dark>load</v-btn>
       <StructureView
       :node="nodeChildren"
+      :name="name"
       >
       </StructureView>
     </v-container>
@@ -24,8 +25,9 @@ export default {
     return {
       nodeChildren : {
         objectName: "Nodes konnten nicht geladen werden",
-        description: "Einstellungen Prüfen"
+        description: "Einstellungen Prüfen",
       },
+      name: "name",
     }
   },
 
@@ -44,7 +46,7 @@ export default {
 
 
     httpReq : async() => {
-      return axios.get("http://192.168.0.33:8098/hierarchy")
+      return axios.get("http://192.168.1.105:8098/hierarchy")
     }
   },
   computed: {

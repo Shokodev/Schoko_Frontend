@@ -11,7 +11,7 @@ export const actions = {
     // @version 1.0
     async readLogicalView({commit}) {
         const response = await axios.get(
-            "http://localhost:8098/logicalview"
+            "http://192.168.1.105:8098/logicalview"
         );
         commit('setLogicalView', response.data)
     }

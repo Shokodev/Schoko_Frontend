@@ -6,13 +6,12 @@
       class="mx-auto"
     >
       <v-card-text>
-        <v-treeview
-          :items="getLogicalView.children"
-          item-text=name
-          shaped
-          hoverable
-        >
-        </v-treeview>
+
+       <StructureView
+               :node="getLogicalView"
+               :name="objectName"
+       >
+       </StructureView>
       </v-card-text>
     </v-card>
 
@@ -46,12 +45,15 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
+    import StructureView from "./StructureView";
 
     export default {
         name: "LogicalView",
-        data() {
+      components: {StructureView},
+      data() {
             return {
               sheet: false,
+              objectName: "objectName",
 
             }
         },
@@ -62,15 +64,17 @@
             ]),
             readLogiView: function () {
                 this.readLogicalView();
-            }
+            },
+          openNode() {
+            this.expanded = !this.expanded;
+            if (!this.hasChildren) {
+              this.$emit('onClick', this.node);
+            }}
         },
         computed: {
           ...mapGetters([
             'getLogicalView'
           ]),
-          fullName: function() {
-            return "bla"
-          }
         }
     };
 </script>

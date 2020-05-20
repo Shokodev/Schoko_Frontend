@@ -96,7 +96,6 @@ export default {
     sendSelectedDevices: function() {
       this.loadingText = "Geräte importieren...";
       this.sendDevices(this.selectedDevices);
-      console.log(this.selectedDevices)
     }
   },
   computed: {
