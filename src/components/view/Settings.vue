@@ -113,7 +113,6 @@ export default {
       trackFill: { label: 'track-fill-color', color: 'grey lighten-6' },
       slider: { label: 'thumb-color', color: 'grey' },
       max: 4,
-      dummyValue: 27.2486,
       bacnetPorts: [
         'BAC0',
         'BAC1',

@@ -6,7 +6,7 @@ export const state = {
 
     host:  { "ip":"127.0.0.1",
               "port":"8098"
-            }
+            },
 
 };
 export const actions = {
