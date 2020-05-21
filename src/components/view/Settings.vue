@@ -1,55 +1,90 @@
 <template>
 <div class="settings">
   <h1 class="subheading grey--text">Einstellungen</h1>
-  <v-card
-   class="mx-auto"
-   max-width="800"
-   outlined
- >
-  <v-form>
-    <v-container>
-      <v-row >
-        <v-col cols="12" md="4">
-          <v-text-field v-model="settings.siteName" label="Site Beschreibung" :counter="16" required></v-text-field>
-        </v-col>
+  <v-card class="mx-auto" max-width="800" outlined>
+    <v-form>
+      <v-container>
+        <v-row>
+
+          <v-col cols="12" md="4">
+            <v-text-field v-model="settings.localDeviceID" label="Device ID" :counter="8" required>
+
+            </v-text-field>
+          </v-col>
+
+          <v-col cols="12" md="4">
+            <v-text-field v-model="settings.bacnetSeparator" label="BACnet Seperator" :counter="1" required>
+
+            </v-text-field>
+          </v-col>
+
+          <v-col cols="12" md="4">
+            <v-select v-model="settings.port" label="BACnet Port" :items="bacnetPorts" :rules="[v => !!v || 'BACnet Port is required']" required>
+            </v-select>
+          </v-col>
 
         <v-col cols="12" md="4">
-          <v-text-field v-model="settings.localDeviceID" label="Device ID" :counter="8" required>
-
-          </v-text-field>
-        </v-col>
-
-        <v-col cols="12" md="4">
-          <v-text-field v-model="settings.bacnetSeparator" label="BACnet Seperator" :counter="1" required>
-
-          </v-text-field>
-        </v-col>
-
-        <v-col cols="12" md="4">
-          <v-select v-model="settings.port" label="BACnet Port" :items="bacnetPorts" :rules="[v => !!v || 'BACnet Port is required']" required>
-
-          </v-select>
-        </v-col>
-
-        <v-col cols="12" md="4">
+          <v-subheader class="pl-0">Anzahl Stellen nach Komma</v-subheader>
           <v-slider
-          v-model="settings.precision"
+          v-model="settings.precisionRealValue"
           max="4"
-          label="Präzision">
+          min="0"
+          :thumb-size="17"
+          :thumb-color="slider.color"
+          :track-color="track.color"
+          :track-fill-color="trackFill.color"
+          thumb-label="always">
           </v-slider>
         </v-col>
 
+        <v-col cols="12" md="4">
+          <v-subheader class="pl-0">Geräte Scan Zeit in Sekunden</v-subheader>
+          <v-slider
+                  v-model="settings.scanSeconds"
+                  max="30"
+                  min="5"
+                  :thumb-size="17"
+                  :thumb-color="slider.color"
+                  :track-color="track.color"
+                  :track-fill-color="trackFill.color"
+                  thumb-label="always">
+          </v-slider>
+        </v-col>
+
+        </v-row>
+        <v-divider></v-divider>
+
+
+
+      </v-container>
+    </v-form>
+  </v-card>
+
+<v-card class="mx-auto" max-width="800" outlined>
+  <v-form>
+    <v-container>
+      <v-row>
+        <v-col cols="12" md="4">
+          <v-text-field v-model="host.ip" label="Host IP" :counter="15" required>
+
+            </v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="4">
+            <v-text-field v-model="host.port" label="Host Port" :counter="4" required>
+
+          </v-text-field>
+        </v-col>
       </v-row>
-       <v-divider></v-divider>
-
-      <v-btn large color="blue-grey" class="white--text" @click="sendSettings()">
-        Speichern
-        <v-icon right dark>save</v-icon>
-      </v-btn>
-
     </v-container>
   </v-form>
 </v-card>
+
+<v-btn large color="blue-grey" class="white--text" @click="sendSettings()">
+  Speichern
+  <v-icon right dark>save</v-icon>
+</v-btn>
+
 </div>
 </template>
 
@@ -63,15 +98,21 @@ export default {
   data() {
     return {
       settings: {
-        siteName: "DefaultSite",
         port: "BAC0",
-        siteDescription: "Description",
         bacnetSeparator: "'",
         localDeviceID: "100010",
-        precision: "2"
+        precisionRealValue: 2,
+        scanSeconds: 5
       },
+      host: {
+        "ip": "",
+        "port": "",
+      },
+
+      track: { label: 'track-color', color: 'light-black lighten-8' },
+      trackFill: { label: 'track-fill-color', color: 'grey lighten-6' },
+      slider: { label: 'thumb-color', color: 'grey' },
       max: 4,
-      dummyValue: 27.2486,
       bacnetPorts: [
         'BAC0',
         'BAC1',
@@ -95,24 +136,36 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getSettings"
+      "getSettings",
+      "getHostIp",
+      "getHostPort",
     ]),
   },
   methods: {
     ...mapActions([
-      'newSettings'
+      'newSettings',
+      'readSettings',
+      'setHostConnection',
+      'connect',
     ]),
+
+
     sendSettings: function() {
+      this.setHostConnection(this.host);
       this.newSettings(this.settings);
+      this.connect();
     },
+
   },
   mounted() {
-    this.settings.siteDescription = this.getSettings.siteDescription;
-    this.settings.siteName = this.getSettings.siteName;
+    this.readSettings();
     this.settings.port = this.getSettings.port;
     this.settings.bacnetSeparator = this.getSettings.bacnetSeparator;
     this.settings.localDeviceID = this.getSettings.localDeviceID;
-    this.settings.precision = this.getSettings.precision;
+    this.settings.precisionRealValue = this.getSettings.precisionRealValue;
+    this.settings.scanSeconds = this.getSettings.scanSeconds;
+    this.host.ip = this.getHostIp;
+    this.host.port = this.getHostPort;
   }
 };
 </script>

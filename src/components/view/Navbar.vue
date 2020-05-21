@@ -37,7 +37,7 @@ export default {
         { icon: 'account_tree', text: 'BACnet', route: '/bacnetview' },
         { icon: 'notification_important', text: 'Alarmliste', route: '/alarmlist' },
         { icon: 'device_hub', text: 'Logische Sicht', route: '/logicalview' },
-        { icon: 'view_agenda', text: 'Gerätesicht', route: '/devices' },
+        { icon: 'view_agenda', text: 'Geräte', route: '/devices' },
         { icon: 'settings', text: 'Einstellungen', route: '/settings' },
         { icon: 'healing', text: 'Admin', route: '/admin' },
       ]

@@ -14,7 +14,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  name: 'HelloWorld',
+  name: 'Admin',
   data() {
     return {
       objectName:"B'H'HGrp11CH'MxCrt'TFl"

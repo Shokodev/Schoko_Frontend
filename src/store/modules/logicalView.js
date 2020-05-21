@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const state = {
-    structure: {}
+    logicalView: {}
 };
 
 export const actions = {
@@ -9,19 +9,19 @@ export const actions = {
     // The data is saved in the store.
     // @author Vogt Andreas,Daniel Reiter, Rafael Grimm
     // @version 1.0
-    async completeHierarchy({commit}) {
+    async readLogicalView({commit}) {
         const response = await axios.get(
-            "http://localhost:8098/logicalview"
+            "http://192.168.1.105:8098/logicalview"
         );
-        commit('setHierarchy', response.data)
+        commit('setLogicalView', response.data)
     }
 };
 export const mutations = {
-    setHierarchy: (state, structure) => (state.structure = structure)
+    setLogicalView: (state, structure) => (state.logicalView = structure)
 };
 
 const getters = {
-    getHierarchy: state => state.structure
+    getLogicalView: state => state.logicalView
 };
 
 export default{
