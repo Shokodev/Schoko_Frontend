@@ -3,7 +3,26 @@
   :style="{'margin-left' : '${depth * 20'}"
   >
 
-    <v-btn @click="openNode" block color="secondary" dark>{{nodeName}} ({{node.description}})</v-btn>
+    <v-btn @click="openNode" block color="secondary" dark>{{nodeName}} ({{node.description}})
+      <v-btn
+        color="primary"
+        @click="overlay = !overlay"
+      >
+              <v-icon>mdi-arrow-right-bold </v-icon>
+      </v-btn>
+
+
+      <v-overlay :value="overlay">
+
+    <v-btn
+      icon
+      @click="overlay = false"
+    >
+      <v-icon>close</v-icon>
+    </v-btn>
+  </v-overlay>
+
+    </v-btn>
 
     <div v-if="expanded">
       <StructureView
@@ -13,6 +32,9 @@
       :key="child.nodeName"
       />
     </div>
+
+
+
 
   </div>
 </template>
@@ -26,7 +48,8 @@
     },
     data() {
       return {
-        expanded: false
+        expanded: false,
+        overlay: false,
       }
     },
 

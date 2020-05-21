@@ -7,6 +7,7 @@ import settings from './modules/settings'
 import LogicalView from './modules/logicalView'
 import devices from "./modules/devices"
 import bacnetObject from "./modules/bacnetObject";
+import bacnetView from "./modules/bacnetView";
 
 
 
@@ -19,9 +20,12 @@ const store = new Vuex.Store({
     settings,
     LogicalView,
     devices,
-    bacnetObject
+    bacnetObject,
+    bacnetView
   },
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState({
+    paths: ['settings']
+  })]
 });
 
 export default store

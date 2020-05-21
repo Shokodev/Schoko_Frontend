@@ -2,9 +2,9 @@
   <div class="bacnetview">
     <h1 class="subheading grey--text">BACnet Sicht</h1>
     <v-container>
-      <v-btn v-on:click="loadSite" block color="secondary" dark>load</v-btn>
+      <v-btn v-on:click="loadBacnetView" block color="secondary" dark>load</v-btn>
       <StructureView
-      :node="nodeChildren"
+      :node="getBacnetView"
       :name="name"
       >
       </StructureView>
@@ -14,9 +14,7 @@
 
 
 <script>
-import axios from 'axios';
-
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions} from "vuex";
 import StructureView from "./StructureView"
 
 export default {
@@ -35,23 +33,20 @@ export default {
     StructureView
   },
 
+  mounted() {
+    this.loadBacnetView();
+  },
 
   methods: {
-     loadSite: async function() {
-      let siteNode = await this.httpReq()
-      this.nodeChildren = siteNode.data
-        console.log(this.nodeChildren)
-      },
-
-
-
-    httpReq : async() => {
-      return axios.get("http://192.168.1.105:8098/hierarchy")
-    }
+    ...mapActions([
+      'loadBacnetView'
+    ]),
   },
+
   computed: {
-    ...mapGetters(["getBacnetObject"])
+    ...mapGetters(["getBacnetObject", "getBacnetView"])
   },
+
 
 }
 </script>
