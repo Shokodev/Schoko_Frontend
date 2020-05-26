@@ -26,14 +26,12 @@ export const actions = {
         )
             .then( res => {
                 commit('setSettings', res.data);
-
             });
-
     },
     // Read the settings from the server and ad them to the store
     // @author Vogt Andreas,Daniel Reiter, Rafael Grimm
     // @version 1.0
-    async readSettings({commit}) {
+    async readSettings({state, commit}) {
         const response = await axios.get(
             "http://" + state.host.ip +":"+ state.host.port + "/settings"
         );

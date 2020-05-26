@@ -9,9 +9,9 @@ export const actions = {
     // The data is saved in the store.
     // @author Vogt Andreas,Daniel Reiter, Rafael Grimm
     // @version 1.0
-    async readLogicalView({commit}) {
+    async readLogicalView({commit, rootState} ) {
         const response = await axios.get(
-            "http://192.168.1.105:8098/logicalview"
+          "http://" + rootState.settings.host.ip +":"+rootState.settings.host.port + '/logicalview'
         );
         commit('setLogicalView', response.data)
     }

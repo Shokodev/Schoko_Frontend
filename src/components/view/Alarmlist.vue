@@ -9,12 +9,13 @@
   >
     <template v-slot:item.ackState="{ item }">
       <v-btn text small color="error" v-if="!item.ackState" class="ma-2"  @click="commandClicked(item.objectName)">
-        ICON
+        <v-icon>mdi-check</v-icon>
       </v-btn>
     </template>
     <template v-slot:item.resetState="{ item }">
       <v-btn text small color="error" v-if="!item.resetState" class="ma-2"  @click="commandClicked(item.objectName)">
-        ICON
+
+        <v-icon>mdi-rotate-left</v-icon>
       </v-btn>
     </template>
   </v-data-table>

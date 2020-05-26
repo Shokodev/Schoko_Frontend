@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const state = {
-  devices: [],
+  devices: {},
   devicesInitialized: false,
   loadingActive: false
 };
