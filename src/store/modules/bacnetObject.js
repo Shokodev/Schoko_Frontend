@@ -20,7 +20,7 @@ const mutations = {
 export const actions = {
     // eslint-disable-next-line no-unused-vars
     subscribeToBacNetObject({ state, commit},objectName) {
-        console.log("subscribe to WS BacNetObject")
+        console.log("subscribe to WS"+objectName)
         if (this.stompClient && this.stompClient.connected) {
             const subscribeURL = "/broker/"+objectName;
             const sendURL = "/app/"+objectName;
@@ -34,11 +34,12 @@ export const actions = {
             console.log("Wurde gesendet:" + objectName)
         }
     },
-    endSubToBacNetObject(){
-        this.stompClient.send("/app/end","B'H'HGrp11CH'MxCrt'TFl",{})
-        this.stompClient.unsubscribe("broker/B'H'HGrp11CH'MxCrt'TFl");
-
-        console.log("SubEnd: B'H'HGrp11CH'MxCrt'TFl")
+    endSubToBacNetObject(subEndObjectName){
+        this.buffer=subEndObjectName
+        console.log(subEndObjectName)
+        this.stompClient.send("/app/end",this.buffer,{})
+        this.stompClient.unsubscribe("broker/"+this.buffer);
+        //console.log("SubEnd:" + subendObjectName) // Warum wird hier nicht wie oben das richtige dargestellt?
     },
 
 };

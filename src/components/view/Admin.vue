@@ -41,10 +41,10 @@ methods: {
     this.subriceToEvents();
   },
   loadObject: function () {
-    this.subscribeToBacNetObject(this.objectName);
+    this.subscribeToBacNetObject();
   },
   endWS: function () {
-    this.endSubToBacNetObject("B'H'HGrp11CH'MxCrt'TFl");
+    this.endSubToBacNetObject();
   }
 
 },
