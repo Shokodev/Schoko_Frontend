@@ -3,7 +3,12 @@
   :style="{'margin-left' : '${depth * 20'}"
   >
 
-    <v-btn @click="openNode" block color="secondary" dark>{{nodeName}} ({{node.description}})</v-btn>
+    <v-btn @click="openNode" block color="secondary" dark>
+      {{nodeName}} ({{node.description}})
+      <div>
+        <Datapoint :node="node" @closeDatapoint="showDatapoint= false" v-if="showDatapoint"></Datapoint>
+      </div>
+    </v-btn>
 
     <div v-if="expanded">
       <StructureView
@@ -14,19 +19,24 @@
       />
     </div>
 
+
   </div>
 </template>
 
 <script>
+  import Datapoint from "./Datapoint";
   export default {
     name: 'StructureView',
+    components: {Datapoint},
     props: {
       node: Object,
       name: String
     },
     data() {
       return {
-        expanded: false
+        expanded: false,
+        showDatapoint: false,
+
       }
     },
 
@@ -43,7 +53,7 @@
   openNode() {
     this.expanded = !this.expanded;
     if (!this.hasChildren) {
-      this.$emit('onClick', this.node);
+        this.showDatapoint = true;
     }
   },
 
