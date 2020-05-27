@@ -34,12 +34,21 @@ export const actions = {
             console.log("Wurde gesendet:" + objectName)
         }
     },
-    endSubToBacNetObject(subEndObjectName){
-        this.buffer=subEndObjectName
-        console.log(subEndObjectName)
-        this.stompClient.send("/app/end",this.buffer,{})
-        this.stompClient.unsubscribe("broker/"+this.buffer);
-        //console.log("SubEnd:" + subendObjectName) // Warum wird hier nicht wie oben das richtige dargestellt?
+    endSubToBacNetObject({commit},subEndObjectName){
+        console.log("Unsubscribe"+subEndObjectName)
+        if (this.stompClient && this.stompClient.connected) {
+            const subscribeURL = "/broker/"+subEndObjectName;
+            const sendURL = "/app/end";
+            this.stompClient.unsubscribe(subscribeURL, tick => {
+
+                console.log(JSON.parse(tick.body)) ;
+                commit("subBacnetobject", null);
+
+            })
+            this.stompClient.send(sendURL,subEndObjectName,{})
+            console.log("Wurde gesendet:" + subEndObjectName)
+        }
+
     },
 
 };

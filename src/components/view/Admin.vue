@@ -4,8 +4,6 @@
     <v-container class="my-5">
       <v-btn rounded color  v-on:click="connectToWs">Verbinden</v-btn>
       <v-btn rounded color  v-on:click="loadEvents">Events</v-btn>
-      <v-btn rounded color  v-on:click="loadObject">Object Laden</v-btn>
-      <v-btn rounded color  v-on:click="endWS">End Object</v-btn>
     </v-container>
 
   </div>
@@ -17,7 +15,7 @@ export default {
   name: 'Admin',
   data() {
     return {
-      objectName:"B'H'HGrp11CH'MxCrt'TFl"
+
 
     }
   },
@@ -40,12 +38,7 @@ methods: {
   loadEvents: function () {
     this.subriceToEvents();
   },
-  loadObject: function () {
-    this.subscribeToBacNetObject();
-  },
-  endWS: function () {
-    this.endSubToBacNetObject();
-  }
+
 
 },
 };
