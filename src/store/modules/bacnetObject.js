@@ -1,7 +1,8 @@
 
 
 export const state = {
-    bacnetObject: []
+    bacnetObject: [],
+    property: {'present-value': "Normal"},
 };
 
 export const getters = {
@@ -38,7 +39,7 @@ export const actions = {
         console.log("Unsubscribe"+subEndObjectName)
         if (this.stompClient && this.stompClient.connected) {
             const subscribeURL = "/broker/"+subEndObjectName;
-            const sendURL = "/app/end";
+            const sendURL = "/app/end/"+subEndObjectName;
             this.stompClient.unsubscribe(subscribeURL, tick => {
 
                 console.log(JSON.parse(tick.body)) ;
@@ -50,6 +51,11 @@ export const actions = {
         }
 
     },
+    sendValueToBacNetObject({state}){
+        const sendURL = "/app/setValue/B'H'HGrp11CH'MxCrt'Pu'Cmd";
+        this.stompClient.send(sendURL,JSON.stringify(state.property),{})
+        console.log("Wurde gesendet:" +state.property )
+    }
 
 };
 export default {

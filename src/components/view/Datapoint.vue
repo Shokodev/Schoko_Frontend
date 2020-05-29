@@ -10,16 +10,27 @@
                         @click="$emit('closeDatapoint'), sheet=!sheet,endWS()"
                 >close</v-btn>
 
-                <div>{{node.objectName}}</div>
 
-                <v-data-table light md="2"
-                              :headers="headers"
-                              :items="getBacnetObject"
-                              :items-per-page="20"
-                              class="elevation-1"
-                >
+                <v-expansion-panels>
+                    <v-expansion-panel
+                            v-for="item in getBacnetObject" :key="item.propertyIdentifier">
+                        <v-expansion-panel-header
+                                :disabled="item.propertyIdentifier!== 'present-value'">{{ item.propertyIdentifier }}: {{item.value}}</v-expansion-panel-header>
+                        <v-expansion-panel-content>
+                            <v-text-field v-model="item.value">
 
-                </v-data-table>
+                            </v-text-field>
+                            <v-btn @click= "sendProperty()">Send</v-btn>
+                        </v-expansion-panel-content>
+                    </v-expansion-panel>
+                </v-expansion-panels>
+
+
+
+
+
+
+
 
             </v-sheet>
         </v-bottom-sheet>
@@ -58,7 +69,8 @@
         methods: {
             ...mapActions([
                 'subscribeToBacNetObject',
-                'endSubToBacNetObject'
+                'endSubToBacNetObject',
+                'sendValueToBacNetObject'
 
             ]),
 
@@ -69,7 +81,11 @@
             endWS: function () {
                 console.log(this.node.objectName)
                 this.endSubToBacNetObject(this.node.objectName);
+            },
+            sendProperty: function (item,value) {
+                console.log(item+value)
             }
+
 
         },
     };
