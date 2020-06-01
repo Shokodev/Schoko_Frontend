@@ -83,7 +83,7 @@
                 this.endSubToBacNetObject(this.node.objectName);
             },
             sendProperty: function (item,value) {
-                console.log(item+value)
+                this.sendValueToBacNetObject(item,value);
             }
 
 

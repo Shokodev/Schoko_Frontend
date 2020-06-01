@@ -2,7 +2,6 @@
 
 export const state = {
     bacnetObject: [],
-    property: {'present-value': "Normal"},
 };
 
 export const getters = {
@@ -51,10 +50,10 @@ export const actions = {
         }
 
     },
-    sendValueToBacNetObject({state}){
-        const sendURL = "/app/setValue/B'H'HGrp11CH'MxCrt'Pu'Cmd";
-        this.stompClient.send(sendURL,JSON.stringify(state.property),{})
-        console.log("Wurde gesendet:" +state.property )
+    sendValueToBacNetObject(subObjectName, property){
+        const sendURL = "/app/setValue/" + subObjectName;
+        this.stompClient.send(sendURL,property,{})
+        console.log("Wurde gesendet");
     }
 
 };
