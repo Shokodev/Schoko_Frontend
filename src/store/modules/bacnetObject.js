@@ -2,6 +2,8 @@
 
 export const state = {
     bacnetObject: [],
+    property: {},
+
 };
 
 export const getters = {
@@ -13,6 +15,9 @@ getBacnetObject: state=> state.bacnetObject
 const mutations = {
     subBacnetobject(state, object){
         state.bacnetObject=object;
+    },
+    setWriteProperty(state,property){
+        state.property= property
     }
 
 };
@@ -50,10 +55,13 @@ export const actions = {
         }
 
     },
-    sendValueToBacNetObject(subObjectName, property){
-        const sendURL = "/app/setValue/" + subObjectName;
-        this.stompClient.send(sendURL,property,{})
-        console.log("Wurde gesendet");
+    sendValueToBacNetObject({state,commit}, property){
+        commit("setWriteProperty", property)
+        let result = state.bacnetObject.find(oblject=>{return oblject['propertyIdentifier']==='object-name'})
+        const sendURL = "/app/setValue/" + result.value;
+        this.stompClient.send(sendURL,JSON.stringify(property),{})
+        console.log("Wurde gesendet an:"+sendURL+"Wert:"+property.value);
+
     }
 
 };

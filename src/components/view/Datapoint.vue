@@ -20,7 +20,7 @@
                             <v-text-field v-model="item.value">
 
                             </v-text-field>
-                            <v-btn @click= "sendProperty()">Send</v-btn>
+                            <v-btn @click= "sendProperty(item.value)">Send</v-btn>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
@@ -82,8 +82,14 @@
                 console.log(this.node.objectName)
                 this.endSubToBacNetObject(this.node.objectName);
             },
-            sendProperty: function (item,value) {
-                this.sendValueToBacNetObject(item,value);
+            sendProperty: function (value) {
+                let obliect = {
+                    objectIdentifier: 'present-value',
+                    value: value
+                }
+                this.sendValueToBacNetObject(obliect)
+
+
             }
 
 
