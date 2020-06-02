@@ -5,7 +5,6 @@
     <v-form>
       <v-container>
         <v-row>
-
           <v-col cols="12" md="4">
             <v-text-field v-model="settings.localDeviceID" label="Device ID" :counter="8" required>
 
@@ -50,17 +49,13 @@
                   thumb-label="always">
           </v-slider>
         </v-col>
-
         </v-row>
         <v-divider></v-divider>
-
-
-
       </v-container>
     </v-form>
   </v-card>
 
-<v-card class="mx-auto" max-width="800" outlined>
+<v-card class="mx-auto " max-width="800" outlined>
   <v-form>
     <v-container>
       <v-row>
@@ -79,11 +74,13 @@
     </v-container>
   </v-form>
 </v-card>
+<v-card class="mx-auto pa-2" max-width="800">
+  <v-btn large color="blue-grey" class="white--text" @click="sendSettings()">
+    Speichern
+    <v-icon right dark>save</v-icon>
+  </v-btn>
+</v-card>
 
-<v-btn large color="blue-grey" class="white--text" @click="sendSettings()">
-  Speichern
-  <v-icon right dark>save</v-icon>
-</v-btn>
 
 </div>
 </template>

@@ -15,7 +15,7 @@ const mutations = {
   newEvents(state, events) {
   //change Date Format from ISO to LocalString
     state.eventList = events;
-    state.neweventList = state.eventList
+    state.neweventList = state.eventList;
     for (let i = 0; i < state.eventList.length; i++) {
       state.neweventList[i].timeStamp = new Date(state.eventList[i].timeStamp).toLocaleString()
     }
@@ -26,7 +26,7 @@ const mutations = {
 export const actions = {
   // eslint-disable-next-line no-unused-vars
   subriceToEvents({ state, commit}) {
-    console.log("subscribe to WS")
+    console.log("subscribe to WS");
   if (this.stompClient && this.stompClient.connected) {
     const subscribeURL = "/broker/eventSub";
     this.stompClient.subscribe(subscribeURL, tick => {
@@ -40,7 +40,7 @@ export const actions = {
   //Used to get events if Tab was closed or new opened
   fetchEvents() {
     const subscribeURL = "/app/getEvents";
-    console.log()
+    console.log();
     this.stompClient.send(subscribeURL, "Fetch Events", {});
   },
 

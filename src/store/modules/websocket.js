@@ -30,7 +30,7 @@ export const mutations = {
 };
 
 export const getters = {
-  getConnecionState: state => state.connected
+  getConnectionState: state => state.connected
 };
 
 export default {
