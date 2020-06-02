@@ -38,6 +38,7 @@ export const actions = {
         commit('backendSettings', response.data);
     }
 };
+
 export const mutations = {
     setSettings: (state, settings) => (state.settings = settings),
     backendSettings: (state, settings) => (state.settings = settings),

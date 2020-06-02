@@ -7,10 +7,10 @@
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">BACnet-Browser</span>
         <span> Schoko</span>
+        <p v-if="getConnectionState != 'CONNECTED'" class="red--text text-center">Verbindung zum Service fehlgeschlagen.</p>
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
-
     <v-navigation-drawer app v-model="drawer" class="secondary" temporary>
       <v-list>
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
@@ -23,11 +23,13 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
   </nav>
 </template>
 
 <script>
+  import {
+    mapGetters
+  } from 'vuex'
 export default {
   data() {
     return {
@@ -42,6 +44,11 @@ export default {
         { icon: 'healing', text: 'Admin', route: '/admin' },
       ]
     }
+  },
+  computed: {
+    ...mapGetters([
+        "getConnectionState"
+    ])
   }
 }
 </script>
