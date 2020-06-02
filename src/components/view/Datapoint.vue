@@ -84,7 +84,7 @@
             },
             sendProperty: function (value) {
                 let obliect = {
-                    objectIdentifier: 'present-value',
+                    propertyIdentifier: 'present-value',
                     value: value
                 }
                 this.sendValueToBacNetObject(obliect)
