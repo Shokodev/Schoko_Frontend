@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const state = {
-  devices: {},
+  devices: [],
   devicesInitialized: false,
   loadingActive: false
 };
@@ -18,10 +18,15 @@ export const actions = {
   },
 
   async preloadDevices({commit, rootState}) {
-    const response = await axios.get(
+   await axios.get(
         "http://" + rootState.settings.host.ip +":"+rootState.settings.host.port + "/preload/devices"
-    );
-    commit('preloadDevices', response.data)
+    ).then(res => {
+     commit('preloadDevices', res.data);
+  }).catch((error) => {
+  console.log('Cant preload devices: ' + error);
+});
+
+
   },
 
   async sendDevices({commit, rootState}, selectedDevices) {

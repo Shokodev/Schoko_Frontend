@@ -76,10 +76,7 @@ export default {
         {text: 'Gerät', value: 'name'},
         {text: 'Gerätetyp', value: 'modelName'},
         {text: 'Adresse', value: 'description'},
-        {
-          text: 'Importiert',
-          value: 'alreadyImported'
-        }
+        {text: 'Importiert', value: 'alreadyImported'}
       ],
     }
     },
