@@ -13,24 +13,21 @@
 
                 <v-expansion-panels>
                     <v-expansion-panel
-                            v-for="item in getBacnetObject" :key="item.propertyIdentifier">
+                            v-for="item in bacNetObject" :key="item.propertyIdentifier">
                         <v-expansion-panel-header
-                                :disabled="item.propertyIdentifier!== 'present-value'">{{ item.propertyIdentifier }}: {{item.value}}</v-expansion-panel-header>
+                                :disabled="item.propertyIdentifier!== 'present-value'"
+                                :hide-actions="item.propertyIdentifier!== 'present-value'">
+                            {{ item.propertyIdentifier }}: {{item.value}}
+                        </v-expansion-panel-header>
                         <v-expansion-panel-content>
                             <v-text-field v-model="item.value">
 
                             </v-text-field>
                             <v-btn @click= "sendProperty(item.value)">Send</v-btn>
+                            <v-btn @click= "releaseProperty(item.value)">Freigeben</v-btn>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
-
-
-
-
-
-
-
 
             </v-sheet>
         </v-bottom-sheet>
@@ -47,6 +44,7 @@
         data() {
             return {
                 sheet: true,
+                transl:[],
                 headers: [
                     {
                         align: 'start',
@@ -57,14 +55,46 @@
                     {text: 'Value', value: 'value'},
 
                 ],
+                translate: [
+                    {
+                        description: "Beschreibung"
+                    },
+                    {  'present-value': "Aktueller Wert"}
+
+                    ]
             }
         },
         created() {
             //do something after creating vue instance
             this.loadObject();
+
+
         },
         computed: {
-            ...mapGetters(["getBacnetObject"])
+            ...mapGetters(["getBacnetObject"]),
+            bacNetObject: function () {
+                let transl = this.getBacnetObject
+                transl.forEach(function(transl){
+
+                    const translate = [
+                        {
+                             description: "Beschreibung"
+                        },
+                        {    'present-value': "Aktueller Wert"}
+
+                    ];
+
+                    for (let i = 0; i < translate.length; i++) {
+
+                        if(translate[i].keys(transl.propertyIdentifier))
+                        {console.log(translate[i])
+                            transl.propertyIdentifier=translate[i].value
+                        }
+                    }
+
+                })
+                return transl
+            }
         },
         methods: {
             ...mapActions([
@@ -79,7 +109,6 @@
 
             },
             endWS: function () {
-                console.log(this.node.objectName)
                 this.endSubToBacNetObject(this.node.objectName);
             },
             sendProperty: function (value) {
@@ -90,7 +119,8 @@
                 this.sendValueToBacNetObject(obliect)
 
 
-            }
+            },
+
 
 
         },
