@@ -57,9 +57,9 @@
                 ],
                 translate: [
                     {
-                        description: "Beschreibung"
+                        value : 'description', de: "Beschreibung"
                     },
-                    {  'present-value': "Aktueller Wert"}
+                    {  value :'present-value', de: "Aktueller Wert"}
 
                     ]
             }
@@ -74,22 +74,16 @@
             ...mapGetters(["getBacnetObject"]),
             bacNetObject: function () {
                 let transl = this.getBacnetObject
+                let translateName = this.translate
                 transl.forEach(function(transl){
+                    for (let i = 0; i < translateName.length; i++) {
 
-                    const translate = [
+                        if(translateName[i].value === transl.propertyIdentifier)
                         {
-                             description: "Beschreibung"
-                        },
-                        {    'present-value': "Aktueller Wert"}
-
-                    ];
-
-                    for (let i = 0; i < translate.length; i++) {
-
-                        if(translate[i].keys(transl.propertyIdentifier))
-                        {console.log(translate[i])
-                            transl.propertyIdentifier=translate[i].value
+                            console.log(transl.propertyIdentifier=translateName[i].value)
+                            transl.propertyIdentifier=translateName[i].de
                         }
+
                     }
 
                 })
@@ -120,6 +114,10 @@
 
 
             },
+            translatePropertyIdentifier:function () {
+                return this.translate
+            }
+
 
 
 
