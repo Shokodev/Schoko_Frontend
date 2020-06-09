@@ -7,7 +7,7 @@
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">BACnet-Browser</span>
         <span> Schoko</span>
-        <p v-if="getConnectionState != 'CONNECTED'" class="red--text text-center">Verbindung zum Service fehlgeschlagen.</p>
+        <p v-if="!getConnectionState" class="red--text text-center">Verbindung zum Service fehlgeschlagen.</p>
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
