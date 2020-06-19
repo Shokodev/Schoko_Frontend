@@ -1,5 +1,6 @@
 import Stomp from "webstomp-client";
 
+
 export const state = () => ({
   connected: false,
   connect_callback: {},
@@ -16,9 +17,12 @@ export const actions = {
     this.stompClient.debug = msg => {}; // eslint-disable-line
     console.log("ws is connecting")
     this.stompClient.connect( {},  frame => {
-      commit("setConnected", frame.command)
-      this.dispatch('subriceToEvents', null, {root: true});
-      this.dispatch('fetchEvents', null, {root: true});
+      if(frame.command === 'CONNECTED') {
+        console.log(frame.command);
+        commit("setConnected", frame.command)
+        this.dispatch('subriceToEvents', null, {root: true});
+        this.dispatch('fetchEvents', null, {root: true});
+      }
     })
   },
 };
