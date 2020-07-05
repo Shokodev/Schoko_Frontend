@@ -4,7 +4,7 @@
   >
 
     <v-btn @click="openNode" block color="secondary" dark>
-      {{nodeName}} ({{node.description}})
+      <p class="type">{{nodeName}} ({{node.description}})</p>
       <div>
         <Datapoint :node="node" @closeDatapoint="showDatapoint= false" v-if="showDatapoint"></Datapoint>
       </div>
@@ -66,6 +66,7 @@
 <style scoped>
 
 .type {
+  text-align: left;
   margin-left: 10px;
 }
 </style>

@@ -33,7 +33,7 @@ export const actions = {
 
                 const object = JSON.parse(tick.body);
                 commit("subBacnetobject", object);
-                console.log(object)
+                //console.log(object)
             })
             this.stompClient.send(sendURL,"",{})
             console.log("Wurde gesendet:" + objectName)
@@ -62,7 +62,14 @@ export const actions = {
         this.stompClient.send(sendURL,JSON.stringify(property),{})
         console.log("Wurde gesendet an:"+sendURL+"Wert:"+property.value);
 
+    },
+    // eslint-disable-next-line no-unused-vars
+    releaseValueToBacNetObject({state,commit},objectName){
+        const sendURL = "/app/releaseValue/" + objectName;
+        this.stompClient.send(sendURL)
+        console.log("Wurde gesendet an:"+sendURL+"Release"+objectName);
     }
+
 
 };
 export default {

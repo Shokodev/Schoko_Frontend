@@ -1,43 +1,26 @@
 <template>
+    <v-bottom-sheet v-model="sheet" persistent>
+    <v-sheet class="text-center" height="60em">
+        <v-btn
+                class="mt-6"
+                text
+                color="error"
+                @click="$emit('closeDatapoint'), sheet=!sheet,endWS()"
+        >close</v-btn>
     <div class="text-center">
-        <v-bottom-sheet v-model="sheet" persistent>
-
-            <v-sheet class="text-center" height="60em">
-                <v-btn
-                        class="mt-6"
-                        text
-                        color="error"
-                        @click="$emit('closeDatapoint'), sheet=!sheet,endWS()"
-                >close</v-btn>
-
-
-                <v-expansion-panels>
-                    <v-expansion-panel
-                            v-for="item in bacNetObject" :key="item.propertyIdentifier">
-                        <v-expansion-panel-header
-                                :disabled="item.propertyIdentifier!== 'present-value'"
-                                :hide-actions="item.propertyIdentifier!== 'present-value'">
-                            {{ item.propertyIdentifier }}: {{item.value}}
-                        </v-expansion-panel-header>
-                        <v-expansion-panel-content>
-                            <v-text-field v-model="item.value">
-
-                            </v-text-field>
-                            <v-btn @click= "sendProperty(item.value)">Send</v-btn>
-                            <v-btn @click= "releaseProperty(item.value)">Freigeben</v-btn>
-                        </v-expansion-panel-content>
-                    </v-expansion-panel>
-                </v-expansion-panels>
-
+        <Binary v-if="true"></Binary>
+    </div>
             </v-sheet>
         </v-bottom-sheet>
-    </div>
+
 </template>
 
 <script>
     import {mapActions, mapGetters} from "vuex";
+    import Binary from "./PropertyView/Binary";
     export default {
         name: "Datapoint",
+        components: {Binary},
         props: {
             node: Object
         },
@@ -56,10 +39,26 @@
 
                 ],
                 translate: [
-                    {
-                        value : 'description', de: "Beschreibung"
+                    {   value : 'description', de: "Beschreibung"
                     },
-                    {  value :'present-value', de: "Aktueller Wert"}
+                    {   value :'present-value', de: "Aktueller Wert"
+                    },
+                    {   value :'object-identifier', de: "Objekt Identifier"
+                    },
+                    {   value :'object-name', de: "Objekt Name"
+                    },
+                    {   value :'out-of-service', de: "Ausser Betrieb"
+                    },
+                    {   value :'active-text', de: "Aktiver Text"
+                    },
+                    {   value :'inactive-text', de: "Inaktiver Text"
+                    },
+                    {   value :'polarity', de: "Polarität"
+                    },
+                    {   value :'state-text', de: "Status Text"
+                    },
+                    {   value :'priority-array', de: "Prioritäten"
+                    }
 
                     ]
             }
@@ -74,19 +73,18 @@
             ...mapGetters(["getBacnetObject"]),
             bacNetObject: function () {
                 let transl = this.getBacnetObject
-                let translateName = this.translate
+                /*let translateName = this.translate
                 transl.forEach(function(transl){
                     for (let i = 0; i < translateName.length; i++) {
 
                         if(translateName[i].value === transl.propertyIdentifier)
                         {
-                            console.log(transl.propertyIdentifier=translateName[i].value)
                             transl.propertyIdentifier=translateName[i].de
                         }
 
                     }
 
-                })
+                })*/
                 return transl
             }
         },
@@ -94,7 +92,8 @@
             ...mapActions([
                 'subscribeToBacNetObject',
                 'endSubToBacNetObject',
-                'sendValueToBacNetObject'
+                'sendValueToBacNetObject',
+                'releaseValueToBacNetObject'
 
             ]),
 
@@ -114,8 +113,8 @@
 
 
             },
-            translatePropertyIdentifier:function () {
-                return this.translate
+            releaseValue: function () {
+            this.releaseValueToBacNetObject(this.node.objectName)
             }
 
 
