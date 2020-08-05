@@ -3,16 +3,19 @@
         <v-expansion-panels>
             <v-expansion-panel>
                 <v-expansion-panel-header>
-                    Aktueller Wert: {{bacNetObject[0].value}}
+                    Aktueller Wert: {{propertyName("present-value")}}
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                    <v-overflow-btn
+                    <v-select
+                            v-on:click="dropdownValue"
                             class="my-2"
                             :items="items"
                             label="Wert"
                             target="#dropdown-example"
-                    ></v-overflow-btn>
-                    <v-btn>Send</v-btn>
+                            v-model="sendValue"
+                            solo
+                    ></v-select>
+                    <v-btn  @click="sendProperty">Send</v-btn>
                     <v-btn>Freigeben</v-btn>
 
                 </v-expansion-panel-content>
@@ -21,7 +24,8 @@
                 <v-expansion-panel-header
                         :disabled="true"
                         :hide-actions="true">
-                    Objekt Identifier: {{bacNetObject[1].value}}</v-expansion-panel-header>
+
+                    Objekt Identifier: {{propertyName("object-identifier")}}</v-expansion-panel-header>
                 <v-expansion-panel-content>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -29,7 +33,7 @@
                 <v-expansion-panel-header
                         :disabled="true"
                         :hide-actions="true">
-                    Objekt Name: {{bacNetObject[2].value}}</v-expansion-panel-header>
+                    Objekt Name: {{propertyName("object-name")}}</v-expansion-panel-header>
                 <v-expansion-panel-content>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -37,7 +41,7 @@
                 <v-expansion-panel-header
                         :disabled="true"
                         :hide-actions="true">
-                    Beschreibung: {{bacNetObject[3].value}}</v-expansion-panel-header>
+                    Beschreibung: {{propertyName("description")}}</v-expansion-panel-header>
                 <v-expansion-panel-content>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -45,7 +49,7 @@
                 <v-expansion-panel-header
                         :disabled="true"
                         :hide-actions="true">
-                    Aktiver Text: {{bacNetObject[4].value}}</v-expansion-panel-header>
+                    Aktiver Text: {{propertyName("active-text")}}</v-expansion-panel-header>
                 <v-expansion-panel-content>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -53,7 +57,7 @@
                 <v-expansion-panel-header
                         :disabled="true"
                         :hide-actions="true">
-                    Inaktiver Text: {{bacNetObject[5].value}}</v-expansion-panel-header>
+                    Inaktiver Text: {{propertyName("inactive-text")}}</v-expansion-panel-header>
                 <v-expansion-panel-content>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -61,7 +65,7 @@
                 <v-expansion-panel-header
                         :disabled="true"
                         :hide-actions="true">
-                    Ausser Betrieb: {{bacNetObject[6].value}}</v-expansion-panel-header>
+                    Ausser Betrieb: {{propertyName("out-of-service")}}</v-expansion-panel-header>
                 <v-expansion-panel-content>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -77,8 +81,8 @@
         data() {
 
             return {
+                sendValue: "",
                 sheet: true,
-                transl:[],
                 items: [],
                 translate: [
                     {   value : 'description', de: "Beschreibung"
@@ -108,10 +112,6 @@
 
         computed: {
             ...mapGetters(["getBacnetObject"]),
-            bacNetObject: function () {
-                let transl = this.getBacnetObject
-                return transl
-            }
         },
         methods: {
             ...mapActions([
@@ -120,10 +120,11 @@
                 'releaseValueToBacNetObject'
 
             ]),
-            sendProperty: function (value) {
+            sendProperty: function () {
+
                 let obliect = {
                     propertyIdentifier: 'present-value',
-                    value: value
+                    value: this.sendValue
                 }
                 this.sendValueToBacNetObject(obliect)
             },
@@ -131,9 +132,14 @@
                 this.releaseValueToBacNetObject(this.node.objectName)
             },
             dropdownValue: function () {
+                this.items.push(this.propertyName("active-text"));
+                this.items.push(this.propertyName("inactive-text"));
 
+            },
+            propertyName: function (searchName) {
+            return this.getBacnetObject.find(oblject=>{return oblject['propertyIdentifier']===searchName}).value
             }
-        },
+        }
     }
 
 </script>
