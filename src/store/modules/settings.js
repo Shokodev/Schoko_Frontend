@@ -22,7 +22,7 @@ export const actions = {
 
     async newSettings({ state, commit },settings)  {
         axios.post(
-            "http://" + state.host.ip +":"+ state.host.port + "/settings", settings
+            "https://" + state.host.ip +":"+ state.host.port + "/settings", settings
         )
             .then( res => {
                 commit('setSettings', res.data);
@@ -33,7 +33,7 @@ export const actions = {
     // @version 1.0
     async readSettings({state, commit}) {
         const response = await axios.get(
-            "http://" + state.host.ip +":"+ state.host.port + "/settings"
+            "https://" + state.host.ip +":"+ state.host.port + "/settings"
         );
         commit('backendSettings', response.data);
     }

@@ -5,16 +5,15 @@
                 <v-expansion-panel-header>
                     Aktueller Wert: {{bacNetObject[0].value}}
                 </v-expansion-panel-header>
-                <v-expansion-panel-content @click="dropdownValue">
+                <v-expansion-panel-content>
                     <v-overflow-btn
                             class="my-2"
-                            items="hoi"
-                            label=""
+                            :items="items"
+                            label="Wert"
                             target="#dropdown-example"
                     ></v-overflow-btn>
                     <v-btn>Send</v-btn>
                     <v-btn>Freigeben</v-btn>
-
 
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -66,22 +65,6 @@
                 <v-expansion-panel-content>
                 </v-expansion-panel-content>
             </v-expansion-panel>
-            <v-expansion-panel>
-                <v-expansion-panel-header
-                        :disabled="true"
-                        :hide-actions="true">
-                    Polarität: {{bacNetObject[7].value}}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                </v-expansion-panel-content>
-            </v-expansion-panel>
-            <v-expansion-panel>
-                <v-expansion-panel-header
-                        :disabled="true"
-                        :hide-actions="true">
-                    Priotität: {{bacNetObject[8].value}}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                </v-expansion-panel-content>
-            </v-expansion-panel>
         </v-expansion-panels>
     </div>
 </template>
@@ -96,6 +79,7 @@
             return {
                 sheet: true,
                 transl:[],
+                items: [],
                 translate: [
                     {   value : 'description', de: "Beschreibung"
                     },
@@ -136,11 +120,6 @@
                 'releaseValueToBacNetObject'
 
             ]),
-            dropdownValue: function (){
-                let result = this.bacnetObject.find(oblject=>{return oblject['propertyIdentifier']==='inactive-text'})
-                console.log(result)
-            },
-
             sendProperty: function (value) {
                 let obliect = {
                     propertyIdentifier: 'present-value',
@@ -151,6 +130,9 @@
             releaseValue: function () {
                 this.releaseValueToBacNetObject(this.node.objectName)
             },
+            dropdownValue: function () {
+
+            }
         },
     }
 

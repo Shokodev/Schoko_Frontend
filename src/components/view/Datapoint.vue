@@ -8,7 +8,7 @@
                 @click="$emit('closeDatapoint'), sheet=!sheet,endWS()"
         >close</v-btn>
     <div class="text-center">
-        <Binary v-if="true"></Binary>
+        <Binary></Binary>
     </div>
             </v-sheet>
         </v-bottom-sheet>

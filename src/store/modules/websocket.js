@@ -12,7 +12,7 @@ export const actions = {
   connect ({ state, commit, rootState }) {
 
     if (state.connected) return;
-    this.socket = new WebSocket("ws://" + rootState.settings.host.ip +":"+rootState.settings.host.port + "/ws" );
+    this.socket = new WebSocket("wss://" + rootState.settings.host.ip +":"+rootState.settings.host.port + "/ws" );
     this.stompClient = Stomp.over(this.socket);
     this.stompClient.debug = msg => {}; // eslint-disable-line
     console.log("ws is connecting")
