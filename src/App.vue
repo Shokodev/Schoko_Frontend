@@ -1,5 +1,5 @@
 <template>
-  <v-app class="primary">
+  <v-app :style="{background: $vuetify.theme.themes[theme].background}">
     <Navbar />
     <v-content class="mx-4 my-3">
       <router-view></router-view>
@@ -45,6 +45,11 @@ watch: {
     }
 
   },
+  computed: {
+    theme() {
+      return this.$vuetify.theme.dark ? "dark" : "light";
+    }
+  }
 
 }
 </script>

@@ -3,10 +3,10 @@
     <v-app-bar
     >
       <v-app-bar-nav-icon @click.stop="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title class="text-uppercase grey--text">
+      <v-toolbar-title class="text-uppercase grey--text" background-color="primary">
         <span class="font-weight-light">BACnet-Browser</span>
-        <span> Schoko</span>
-      </v-toolbar-title>
+        <span> Shoko</span>
+      </v-toolbar-title >
           <v-spacer></v-spacer>
       <svg v-if="getConnectionState" id="Group" width="40" height="42" viewBox="0 0 40 42" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="20" cy="21" r="20" fill="#6B9B2F"/>

@@ -5,7 +5,9 @@ export const state = {
     settings: {"port":"BAC0","localDeviceID":"1001","precisionRealValue":2,"scanSeconds":5},
 
     host:  { "ip":"127.0.0.1",
-              "port":"8098"
+              "port":"8098",
+              "protocol":"http://", //-> https://
+              "ws": "ws://" //-> wss://
             },
 
 };
@@ -22,7 +24,7 @@ export const actions = {
 
     async newSettings({ state, commit },settings)  {
         axios.post(
-            "https://" + state.host.ip +":"+ state.host.port + "/settings", settings
+            state.host.protocol + state.host.ip +":"+ state.host.port + "/settings", settings
         )
             .then( res => {
                 commit('setSettings', res.data);
@@ -33,7 +35,7 @@ export const actions = {
     // @version 1.0
     async readSettings({state, commit}) {
         const response = await axios.get(
-            "https://" + state.host.ip +":"+ state.host.port + "/settings"
+            state.host.protocol + state.host.ip +":"+ state.host.port + "/settings"
         );
         commit('backendSettings', response.data);
     }

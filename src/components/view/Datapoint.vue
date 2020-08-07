@@ -4,9 +4,11 @@
         <v-btn
                 class="mt-6"
                 text
-                color="error"
+                color="black"
                 @click="$emit('closeDatapoint'), sheet=!sheet,endWS()"
-        >close</v-btn>
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
     <div class="text-center">
         <Binary></Binary>
     </div>

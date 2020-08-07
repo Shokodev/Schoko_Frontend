@@ -1,9 +1,9 @@
 <template>
     <div class="text-center">
-        <v-expansion-panels>
+        <v-expansion-panels class="pa-10">
             <v-expansion-panel>
-                <v-expansion-panel-header>
-                    Aktueller Wert: {{propertyName("present-value")}}
+                <v-expansion-panel-header class="font-weight-bold">
+                  Aktueller Wert: <span class="ma-2 font-weight-regular"> {{propertyName("present-value")}}</span>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
                     <v-select
@@ -17,58 +17,80 @@
                     ></v-select>
                     <v-btn  @click="sendProperty">Send</v-btn>
                     <v-btn>Freigeben</v-btn>
+                </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel>
+                <v-expansion-panel-header
+                        :disabled="true"
+                        :hide-actions="true"
+                        class="font-weight-bold">
 
+                  Objekt Identifier:  <span class="ma-2 font-weight-regular">{{propertyName("object-identifier")}}</span>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
                 </v-expansion-panel-content>
             </v-expansion-panel>
-            <v-expansion-panel>
-                <v-expansion-panel-header
-                        :disabled="true"
-                        :hide-actions="true">
+          <v-expansion-panel>
+            <v-expansion-panel-header
+                :disabled="true"
+                :hide-actions="true"
+                class="font-weight-bold">
 
-                    Objekt Identifier: {{propertyName("object-identifier")}}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                </v-expansion-panel-content>
-            </v-expansion-panel>
+              Priorität:  <span class="ma-2 font-weight-regular">{{propertyName("priority-array")}}</span>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
             <v-expansion-panel>
                 <v-expansion-panel-header
                         :disabled="true"
-                        :hide-actions="true">
-                    Objekt Name: {{propertyName("object-name")}}</v-expansion-panel-header>
+                        :hide-actions="true"
+                        class="font-weight-bold">
+                    Objekt Name: <span class="ma-2 font-weight-regular">{{propertyName("object-name")}}</span>
+                </v-expansion-panel-header>
                 <v-expansion-panel-content>
                 </v-expansion-panel-content>
             </v-expansion-panel>
-            <v-expansion-panel>
-                <v-expansion-panel-header
-                        :disabled="true"
-                        :hide-actions="true">
-                    Beschreibung: {{propertyName("description")}}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                </v-expansion-panel-content>
-            </v-expansion-panel>
-            <v-expansion-panel>
-                <v-expansion-panel-header
-                        :disabled="true"
-                        :hide-actions="true">
-                    Aktiver Text: {{propertyName("active-text")}}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                </v-expansion-panel-content>
-            </v-expansion-panel>
-            <v-expansion-panel>
-                <v-expansion-panel-header
-                        :disabled="true"
-                        :hide-actions="true">
-                    Inaktiver Text: {{propertyName("inactive-text")}}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                </v-expansion-panel-content>
-            </v-expansion-panel>
-            <v-expansion-panel>
-                <v-expansion-panel-header
-                        :disabled="true"
-                        :hide-actions="true">
-                    Ausser Betrieb: {{propertyName("out-of-service")}}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                </v-expansion-panel-content>
-            </v-expansion-panel>
+          <v-expansion-panel>
+            <v-expansion-panel-header
+                :disabled="true"
+                :hide-actions="true"
+                class="font-weight-bold">
+              Beschreibung: <span class="ma-2 font-weight-regular">{{propertyName("description")}}</span>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <v-expansion-panel>
+            <v-expansion-panel-header
+                :disabled="true"
+                :hide-actions="true"
+                class="font-weight-bold">
+              Aktiv Text: <span class="ma-2 font-weight-regular">{{propertyName("active-text")}}</span>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <v-expansion-panel>
+            <v-expansion-panel-header
+                :disabled="true"
+                :hide-actions="true"
+                class="font-weight-bold">
+              Inaktiv Text: <span class="ma-2 font-weight-regular">{{propertyName("inactive-text")}}</span>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <v-expansion-panel>
+            <v-expansion-panel-header
+                :disabled="true"
+                :hide-actions="true"
+                class="font-weight-bold">
+              Ausser Betrieb: <span class="ma-2 font-weight-regular">{{propertyName("out-of-service")}}</span>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
         </v-expansion-panels>
     </div>
 </template>
@@ -129,15 +151,16 @@
                 this.sendValueToBacNetObject(obliect)
             },
             releaseValue: function () {
-                this.releaseValueToBacNetObject(this.node.objectName)
+                this.releaseValueToBacNetObject(this.propertyName("object-name"))
             },
+
             dropdownValue: function () {
                 this.items.push(this.propertyName("active-text"));
                 this.items.push(this.propertyName("inactive-text"));
 
             },
             propertyName: function (searchName) {
-            return this.getBacnetObject.find(oblject=>{return oblject['propertyIdentifier']===searchName}).value
+            return this.getBacnetObject.find(property=>{return property['propertyIdentifier']===searchName}).value
             }
         }
     }
