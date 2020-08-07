@@ -6,8 +6,8 @@ export const state = {
 
     host:  { "ip":"127.0.0.1",
               "port":"8098",
-              "protocol":"http://", //-> https://
-              "ws": "ws://" //-> wss://
+              "protocol":"https://", //-> http://
+              "ws": "wss://" //-> ws://
             },
 
 };
