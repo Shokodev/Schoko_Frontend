@@ -4,7 +4,6 @@ import Settings from '../components/view/Settings.vue'
 import AlarmList from "../components/view/Alarmlist"
 import Devices from "../components/view/Devices"
 import BacnetView from "../components/view/BacnetView"
-import Admin from "../components/view/Admin"
 
 // routes[] with all the different views.
 // @author Vogt Andreas,Daniel Reiter, Rafael Grimm
@@ -43,11 +42,6 @@ export const routes = [
         path: '/bacnetview',
         name: 'bacnetView',
         component: BacnetView
-    },
-    {
-        path: '/admin',
-        name: 'admin',
-        component: Admin
     },
 
 ];

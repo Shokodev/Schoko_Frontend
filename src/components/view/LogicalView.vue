@@ -1,7 +1,6 @@
 <template>
   <div class="logicalview">
     <h1 class="subheading grey--text">Logische Sicht</h1>
-    <button  v-on:click="readLogiView">LogicalView</button>
     <v-card
       class="mx-auto"
     >
@@ -50,6 +49,9 @@
           ...mapGetters([
             'getLogicalView'
           ]),
+        },
+        mounted() {
+          this.readLogiView();
         }
     };
 </script>

@@ -4,10 +4,10 @@ export const state = {
 
     settings: {"port":"BAC0","localDeviceID":"1001","precisionRealValue":2,"scanSeconds":5},
 
-    host:  { "ip":"127.0.0.1",
-              "port":"8098",
-              "protocol":"http://", //-> https://
-              "ws": "ws://" //-> wss://
+    host:  { "ip":"rafaelgrimm.internet-box.ch",
+              "port":"443",
+              "protocol":"https://", //-> http://
+              "ws": "wss://" //-> ws://
             },
 
 };

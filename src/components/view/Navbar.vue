@@ -47,7 +47,6 @@ export default {
         { icon: 'device_hub', text: 'Logische Sicht', route: '/logicalview' },
         { icon: 'view_agenda', text: 'Geräte', route: '/devices' },
         { icon: 'settings', text: 'Einstellungen', route: '/settings' },
-        { icon: 'healing', text: 'Admin', route: '/admin' },
       ]
     }
   },

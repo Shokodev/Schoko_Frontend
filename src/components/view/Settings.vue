@@ -60,13 +60,13 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="4">
-          <v-text-field v-model="host.ip" label="Host IP" :counter="15" required>
+          <v-text-field disabled v-model="host.ip" label="Host IP" :counter="15" required>
 
             </v-text-field>
             </v-col>
 
             <v-col cols="12" md="4">
-            <v-text-field v-model="host.port" label="Host Port" :counter="4" required>
+            <v-text-field disabled v-model="host.port" label="Host Port" :counter="4" required>
 
           </v-text-field>
         </v-col>
