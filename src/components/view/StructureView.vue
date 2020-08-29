@@ -52,7 +52,7 @@
     methods: {
   openNode() {
     this.expanded = !this.expanded;
-    if (!this.hasChildren) {
+    if (this.hasChildren.length === 0) {
         this.showDatapoint = true;
     }
   },
